@@ -7,10 +7,10 @@ const cache = require("../cache/cacheManager");
 
 const CACHE_DURATION = 5 * 60 * 1000;
 
-async function getKegiatan() {
+async function getKegiatan(forceRefresh = false) {
 
-  // Cache masih berlaku
   if (
+    !forceRefresh &&
     cache.kegiatan &&
     Date.now() - cache.kegiatanTime < CACHE_DURATION
   ) {
@@ -18,13 +18,11 @@ async function getKegiatan() {
     return cache.kegiatan;
   }
 
-  // Kalau sedang ada request lain yang membuat cache
-  if (cache.kegiatanLoading) {
+  if (!forceRefresh && cache.kegiatanLoading) {
     console.log("⏳ Menunggu cache kegiatan...");
     return cache.kegiatanLoading;
   }
 
-  // Hanya SATU request yang boleh membuat cache
   cache.kegiatanLoading = (async () => {
 
     console.log("📄 Mengambil kegiatan dari Google Sheets...");

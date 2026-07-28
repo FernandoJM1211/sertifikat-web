@@ -10,12 +10,13 @@ const CACHE_DURATION = 5 * 60 * 1000;
 // =========================
 // LOAD SEMUA DATA
 // =========================
-async function loadCertificates() {
+async function loadCertificates(forceRefresh = false) {
 
   // =========================
   // CACHE MASIH BERLAKU
   // =========================
   if (
+    !forceRefresh &&
     cache.sertifikat &&
     Date.now() - cache.sertifikatTime < CACHE_DURATION
   ) {
@@ -27,7 +28,7 @@ async function loadCertificates() {
   // JIKA SEDANG MEMBANGUN CACHE
   // REQUEST LAIN TINGGAL MENUNGGU
   // =========================
-  if (cache.sertifikatLoading) {
+  if (!forceRefresh && cache.sertifikatLoading) {
     console.log("⏳ Menunggu cache selesai dibuat...");
     return cache.sertifikatLoading;
   }
@@ -53,16 +54,12 @@ async function loadCertificates() {
 
     // Ambil semua sheet secara paralel
     const responses = await Promise.all(
-
       sheetList.map(title =>
-
         sheets.spreadsheets.values.get({
           spreadsheetId: SPREADSHEET_ID,
           range: `${title}!A:Z`,
         })
-
       )
-
     );
 
     const allCertificates = [];
@@ -90,7 +87,6 @@ async function loadCertificates() {
 
     console.log(`📦 Cache berhasil dibuat (${allCertificates.length} sertifikat)`);
 
-    // Simpan ke cache
     cache.sertifikat = allCertificates;
     cache.sertifikatTime = Date.now();
     cache.sertifikatCount = allCertificates.length;
@@ -130,5 +126,6 @@ async function searchCertificates(keyword) {
 }
 
 module.exports = {
+  loadCertificates,
   searchCertificates,
 };
