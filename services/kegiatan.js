@@ -3,54 +3,75 @@ const {
   getSheetsService,
 } = require("./google");
 
-// Cache
-let cache = null;
-let cacheTime = 0;
+const cache = require("../cache/cacheManager");
 
-// 5 menit
 const CACHE_DURATION = 5 * 60 * 1000;
 
 async function getKegiatan() {
 
-  // Kalau cache masih berlaku
-  if (cache && Date.now() - cacheTime < CACHE_DURATION) {
-    console.log("✅ Data dari CACHE");
-    return cache;
+  // Cache masih berlaku
+  if (
+    cache.kegiatan &&
+    Date.now() - cache.kegiatanTime < CACHE_DURATION
+  ) {
+    console.log("✅ Kegiatan dari CACHE");
+    return cache.kegiatan;
   }
 
-  console.log("📄 Ambil dari Google Sheets");
-
-  const sheets = await getSheetsService();
-
-  const response = await sheets.spreadsheets.values.get({
-    spreadsheetId: SPREADSHEET_ID,
-    range: "Kegiatan!A:J",
-  });
-
-  const rows = response.data.values || [];
-
-  if (rows.length < 2) {
-    return null;
+  // Kalau sedang ada request lain yang membuat cache
+  if (cache.kegiatanLoading) {
+    console.log("⏳ Menunggu cache kegiatan...");
+    return cache.kegiatanLoading;
   }
 
-  const data = {
-    nama: rows[1][0] || "",
-    flyer: rows[1][1] || "",
-    tanggal: rows[1][2] || "",
-    waktu: rows[1][3] || "",
-    deskripsi: rows[1][4] || "",
-    zoom: rows[1][5] || "",
-    youtube: rows[1][6] || "",
-    virtualBackground: rows[1][7] || "",
-    presensi: rows[1][8] || "",
-    files: rows[1][9] || "",
-  };
+  // Hanya SATU request yang boleh membuat cache
+  cache.kegiatanLoading = (async () => {
 
-  // Simpan cache
-  cache = data;
-  cacheTime = Date.now();
+    console.log("📄 Mengambil kegiatan dari Google Sheets...");
 
-  return data;
+    const sheets = await getSheetsService();
+
+    const response = await sheets.spreadsheets.values.get({
+      spreadsheetId: SPREADSHEET_ID,
+      range: "Kegiatan!A:J",
+    });
+
+    const rows = response.data.values || [];
+
+    if (rows.length < 2) {
+      return null;
+    }
+
+    const data = {
+      nama: rows[1][0] || "",
+      flyer: rows[1][1] || "",
+      tanggal: rows[1][2] || "",
+      waktu: rows[1][3] || "",
+      deskripsi: rows[1][4] || "",
+      zoom: rows[1][5] || "",
+      youtube: rows[1][6] || "",
+      virtualBackground: rows[1][7] || "",
+      presensi: rows[1][8] || "",
+      files: rows[1][9] || "",
+    };
+
+    cache.kegiatan = data;
+    cache.kegiatanTime = Date.now();
+
+    return data;
+
+  })();
+
+  try {
+
+    return await cache.kegiatanLoading;
+
+  } finally {
+
+    cache.kegiatanLoading = null;
+
+  }
+
 }
 
 module.exports = {
