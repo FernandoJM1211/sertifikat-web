@@ -9,15 +9,13 @@ const {
 let certificateCache = null;
 let cacheTime = 0;
 
-// Cache 5 menit
 const CACHE_DURATION = 5 * 60 * 1000;
 
 // =========================
-// LOAD SEMUA SERTIFIKAT
+// LOAD SEMUA DATA
 // =========================
 async function loadCertificates() {
 
-  // Jika cache masih berlaku
   if (
     certificateCache &&
     Date.now() - cacheTime < CACHE_DURATION
@@ -26,7 +24,7 @@ async function loadCertificates() {
     return certificateCache;
   }
 
-  console.log("📄 Mengambil data sertifikat dari Google Sheets...");
+  console.log("📄 Mengambil data dari Google Sheets...");
 
   const sheets = await getSheetsService();
 
@@ -35,56 +33,69 @@ async function loadCertificates() {
     spreadsheetId: SPREADSHEET_ID,
   });
 
-  const sheetList = spreadsheet.data.sheets;
+  const sheetList = spreadsheet.data.sheets
+    .map(sheet => sheet.properties.title)
+    .filter(title => title !== "Kegiatan");
+
+  // =========================
+  // LOAD SEMUA SHEET SECARA PARALEL
+  // =========================
+
+  const responses = await Promise.all(
+
+    sheetList.map(title =>
+
+      sheets.spreadsheets.values.get({
+        spreadsheetId: SPREADSHEET_ID,
+        range: `${title}!A:Z`,
+      })
+
+    )
+
+  );
 
   const allCertificates = [];
 
-  // Loop semua sheet
-  for (const sheet of sheetList) {
+  responses.forEach((response, index) => {
 
-    const title = sheet.properties.title;
-
-    // Skip sheet kegiatan
-    if (title === "Kegiatan") continue;
-
-    const response = await sheets.spreadsheets.values.get({
-      spreadsheetId: SPREADSHEET_ID,
-      range: `${title}!A:Z`,
-    });
+    const title = sheetList[index];
 
     const rows = response.data.values || [];
 
-    if (rows.length < 2) continue;
+    if (rows.length < 2) return;
 
-    // Skip header
-    for (const row of rows.slice(1)) {
+    rows.slice(1).forEach(row => {
 
       allCertificates.push({
         nama: row[0] || "",
         instansi: row[1] || "",
         kegiatan: row[2] || "",
         sertifikat: row[3] || "",
+        sheet: title
       });
 
-    }
+    });
 
-  }
+  });
 
-  console.log(`📦 Total sertifikat dimuat: ${allCertificates.length}`);
+  console.log(`📦 Cache berhasil dibuat (${allCertificates.length} sertifikat)`);
 
-  // Simpan ke cache
   certificateCache = allCertificates;
   cacheTime = Date.now();
 
-  return allCertificates;
+  return certificateCache;
+
 }
 
 // =========================
 // SEARCH
 // =========================
+
 async function searchCertificates(keyword) {
 
-  const keywordLower = keyword.toLowerCase().trim();
+  const keywordLower = keyword
+    .toLowerCase()
+    .trim();
 
   const data = await loadCertificates();
 
