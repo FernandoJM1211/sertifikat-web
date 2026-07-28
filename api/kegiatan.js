@@ -4,6 +4,11 @@ module.exports = async (req, res) => {
   try {
     const data = await getKegiatan();
 
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=300, stale-while-revalidate=600"
+    );
+
     res.status(200).json({
       success: true,
       data,
