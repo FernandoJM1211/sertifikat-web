@@ -3,11 +3,7 @@ const {
   getSheetsService,
 } = require("./google");
 
-// =========================
-// CACHE
-// =========================
-let certificateCache = null;
-let cacheTime = 0;
+const cache = require("../cache/cacheManager");
 
 const CACHE_DURATION = 5 * 60 * 1000;
 
@@ -16,74 +12,102 @@ const CACHE_DURATION = 5 * 60 * 1000;
 // =========================
 async function loadCertificates() {
 
+  // =========================
+  // CACHE MASIH BERLAKU
+  // =========================
   if (
-    certificateCache &&
-    Date.now() - cacheTime < CACHE_DURATION
+    cache.sertifikat &&
+    Date.now() - cache.sertifikatTime < CACHE_DURATION
   ) {
     console.log("✅ Sertifikat dari CACHE");
-    return certificateCache;
+    return cache.sertifikat;
   }
 
-  console.log("📄 Mengambil data dari Google Sheets...");
-
-  const sheets = await getSheetsService();
-
-  // Ambil daftar sheet
-  const spreadsheet = await sheets.spreadsheets.get({
-    spreadsheetId: SPREADSHEET_ID,
-  });
-
-  const sheetList = spreadsheet.data.sheets
-    .map(sheet => sheet.properties.title)
-    .filter(title => title !== "Kegiatan");
+  // =========================
+  // JIKA SEDANG MEMBANGUN CACHE
+  // REQUEST LAIN TINGGAL MENUNGGU
+  // =========================
+  if (cache.sertifikatLoading) {
+    console.log("⏳ Menunggu cache selesai dibuat...");
+    return cache.sertifikatLoading;
+  }
 
   // =========================
-  // LOAD SEMUA SHEET SECARA PARALEL
+  // HANYA SATU REQUEST YANG
+  // MEMBANGUN CACHE
   // =========================
+  cache.sertifikatLoading = (async () => {
 
-  const responses = await Promise.all(
+    console.log("📄 Mengambil data dari Google Sheets...");
 
-    sheetList.map(title =>
+    const sheets = await getSheetsService();
 
-      sheets.spreadsheets.values.get({
-        spreadsheetId: SPREADSHEET_ID,
-        range: `${title}!A:Z`,
-      })
+    // Ambil daftar sheet
+    const spreadsheet = await sheets.spreadsheets.get({
+      spreadsheetId: SPREADSHEET_ID,
+    });
 
-    )
+    const sheetList = spreadsheet.data.sheets
+      .map(sheet => sheet.properties.title)
+      .filter(title => title !== "Kegiatan");
 
-  );
+    // Ambil semua sheet secara paralel
+    const responses = await Promise.all(
 
-  const allCertificates = [];
+      sheetList.map(title =>
 
-  responses.forEach((response, index) => {
+        sheets.spreadsheets.values.get({
+          spreadsheetId: SPREADSHEET_ID,
+          range: `${title}!A:Z`,
+        })
 
-    const title = sheetList[index];
+      )
 
-    const rows = response.data.values || [];
+    );
 
-    if (rows.length < 2) return;
+    const allCertificates = [];
 
-    rows.slice(1).forEach(row => {
+    responses.forEach((response, index) => {
 
-      allCertificates.push({
-        nama: row[0] || "",
-        instansi: row[1] || "",
-        kegiatan: row[2] || "",
-        sertifikat: row[3] || "",
-        sheet: title
+      const title = sheetList[index];
+      const rows = response.data.values || [];
+
+      if (rows.length < 2) return;
+
+      rows.slice(1).forEach(row => {
+
+        allCertificates.push({
+          nama: row[0] || "",
+          instansi: row[1] || "",
+          kegiatan: row[2] || "",
+          sertifikat: row[3] || "",
+          sheet: title,
+        });
+
       });
 
     });
 
-  });
+    console.log(`📦 Cache berhasil dibuat (${allCertificates.length} sertifikat)`);
 
-  console.log(`📦 Cache berhasil dibuat (${allCertificates.length} sertifikat)`);
+    // Simpan ke cache
+    cache.sertifikat = allCertificates;
+    cache.sertifikatTime = Date.now();
+    cache.sertifikatCount = allCertificates.length;
 
-  certificateCache = allCertificates;
-  cacheTime = Date.now();
+    return cache.sertifikat;
 
-  return certificateCache;
+  })();
+
+  try {
+
+    return await cache.sertifikatLoading;
+
+  } finally {
+
+    cache.sertifikatLoading = null;
+
+  }
 
 }
 
