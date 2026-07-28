@@ -11,6 +11,11 @@ export default function () {
     "https://sertifikat-web-pearl.vercel.app/api/sertifikat?keyword=Fernando"
   );
 
+  if (res.status !== 200) {
+    console.log(`Status: ${res.status}`);
+    console.log(res.body);
+  }
+
   check(res, {
     "status is 200": (r) => r.status === 200,
   });
