@@ -111,7 +111,7 @@ async function loadCertificates(forceRefresh = false) {
 // SEARCH
 // =========================
 
-async function searchCertificates(keyword) {
+async function searchCertificates(keyword, kode) {
 
   const keywordLower = keyword
     .toLowerCase()
@@ -120,7 +120,13 @@ async function searchCertificates(keyword) {
   const data = await loadCertificates();
 
   return data.filter(item =>
-    item.nama.toLowerCase().includes(keywordLower)
+
+    item.sheet === kode &&
+
+    item.nama
+      .toLowerCase()
+      .includes(keywordLower)
+
   );
 
 }

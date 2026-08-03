@@ -5,6 +5,7 @@ module.exports = async (req, res) => {
     try {
 
         const keyword = req.query.keyword || "";
+        const kode = req.query.kode || "";
 
         if (!keyword.trim()) {
 
@@ -15,7 +16,16 @@ module.exports = async (req, res) => {
 
         }
 
-        const data = await searchCertificates(keyword);
+        if (!kode.trim()) {
+
+            return res.status(400).json({
+                success: false,
+                message: "Kode kegiatan wajib diisi."
+            });
+
+        }
+
+        const data = await searchCertificates(keyword, kode);
 
         return res.status(200).json({
             success: true,

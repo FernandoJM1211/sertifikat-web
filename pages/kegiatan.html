@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Portal Kegiatan DTDP</title>
+
+<link rel="icon"
+      type="image/png"
+      href="../images/logo-lan.png">
+
+<link rel="stylesheet"
+      href="../css/style.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<aside class="sidebar" id="sidebar">
+
+<button
+class="toggle-sidebar"
+onclick="toggleSidebar()">
+
+☰
+
+</button>
+
+<div class="nav">
+
+<button
+class="nav-button active"
+id="btn-info"
+onclick="bukaTab('info')">
+
+ℹ️
+<span>Informasi Kegiatan</span>
+
+</button>
+
+<button
+class="nav-button"
+id="btn-sertifikat"
+onclick="bukaTab('sertifikat')">
+
+📄
+<span>Sertifikat</span>
+
+</button>
+
+<button
+class="nav-button"
+id="btn-presensi"
+onclick="bukaTab('presensi')">
+
+📝
+<span>Presensi</span>
+
+</button>
+
+<button
+class="nav-button"
+id="btn-siaran"
+onclick="bukaTab('siaran')">
+
+📡
+<span>Akses Streaming</span>
+
+</button>
+
+<button
+class="nav-button"
+id="btn-files"
+onclick="bukaTab('files')">
+
+📁
+<span>Files</span>
+
+</button>
+
+</div>
+
+</aside>
+
+<main class="main">
+
+<div class="content-header">
+
+<div class="logo-container">
+
+<img
+src="../images/logo-lan.png"
+alt="Logo LAN">
+
+</div>
+
+<div class="header-title">
+
+<h1>
+
+Direktorat Teknologi dan Digitalisasi Pembelajaran
+
+</h1>
+
+<p>
+
+Lembaga Administrasi Negara
+
+</p>
+
+</div>
+
+</div>
+
+<div class="page">
+
+<div style="margin-bottom:20px;">
+
+<a
+href="home.html"
+class="btn-file">
+
+← Kembali ke Daftar Kegiatan
+
+</a>
+
+</div>
+
+<section
+id="tab-sertifikat"
+class="tab-content">
+
+<div class="search-card">
+
+<div class="icon-circle">
+
+📄
+
+</div>
+
+<h2>
+
+Pencarian Sertifikat Kegiatan
+
+</h2>
+
+<p class="notice">
+
+<strong>
+
+SERTIFIKAT TERSEDIA MINIMAL
+H+14 KERJA SETELAH
+PELAKSANAAN WEBINAR.
+
+</strong>
+
+</p>
+
+<p class="description">
+
+Masukkan nama peserta
+untuk mencari sertifikat
+kegiatan yang telah diikuti.
+
+Pastikan nama yang dimasukkan
+sesuai dengan data pendaftaran.
+
+</p>
+
+<div class="search-row">
+
+<input
+id="keyword"
+placeholder="Masukkan nama peserta">
+
+<button
+onclick="cari()">
+
+Cari Sertifikat
+
+</button>
+
+</div>
+
+</div>
+
+<div id="hasil"></div>
+
+<div class="footer-note">
+
+Pastikan nama yang dimasukkan
+sesuai dengan data pendaftaran.
+
+Jika sertifikat belum tersedia,
+silakan cek kembali secara berkala
+atau hubungi panitia kegiatan.
+
+</div>
+
+<div class="hotline-card">
+
+<h3>
+
+📞 Butuh Bantuan?
+
+</h3>
+
+<p>
+
+Jika mengalami kendala
+presensi,
+akses streaming,
+file pendukung,
+maupun sertifikat kegiatan,
+silakan hubungi
+Panitia DTDP.
+
+</p>
+
+<a
+href="https://wa.me/6287782214464"
+target="_blank"
+class="btn-wa">
+
+💬 Hubungi via WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+<section
+id="tab-info"
+class="tab-content active">
+
+<div class="info-layout">
+
+<div class="flyer-card">
+
+<img
+id="info-flyer"
+src=""
+alt="Flyer Kegiatan">
+
+</div>
+
+<div class="info-side-card">
+
+<h2 id="info-nama">
+
+Nama Kegiatan
+
+</h2>
+
+<div class="info-item">
+
+<div class="info-label">
+
+Tanggal
+
+</div>
+
+<div
+class="info-value"
+id="info-tanggal">
+
+-
+
+</div>
+
+</div>
+
+<div class="info-item">
+
+<div class="info-label">
+
+Waktu
+
+</div>
+
+<div
+class="info-value"
+id="info-waktu">
+
+-
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="desc-card">
+
+<h3>
+
+Deskripsi Kegiatan
+
+</h3>
+
+<p id="info-deskripsi">
+
+-
+
+</p>
+
+</div>
+
+<div class="hotline-card">
+
+<h3>
+
+📞 Butuh Bantuan?
+
+</h3>
+
+<p>
+
+Jika mengalami kendala
+presensi,
+akses streaming,
+file pendukung,
+maupun sertifikat kegiatan,
+silakan hubungi
+Panitia DTDP.
+
+</p>
+
+<a
+href="https://wa.me/6287782214464"
+target="_blank"
+class="btn-wa">
+
+💬 Hubungi via WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+<section id="tab-presensi" class="tab-content">
+
+    <div class="search-card">
+
+        <div class="icon-circle">
+            📝
+        </div>
+
+        <h2>Presensi Kegiatan</h2>
+
+        <p>
+            Silakan mengisi daftar hadir kegiatan melalui tautan presensi berikut.
+        </p>
+
+        <a
+            id="link-presensi"
+            class="btn-presensi"
+            href="#"
+            target="_blank">
+
+            Isi Presensi
+
+        </a>
+
+    </div>
+
+    <div class="footer-note">
+
+        Pastikan data presensi diisi dengan benar karena akan digunakan
+        untuk kebutuhan administrasi kegiatan.
+
+    </div>
+
+    <div class="hotline-card">
+
+        <h3>📞 Butuh Bantuan?</h3>
+
+        <p>
+
+            Jika mengalami kendala presensi,
+            akses streaming,
+            file pendukung,
+            maupun sertifikat kegiatan,
+            silakan hubungi Panitia DTDP.
+
+        </p>
+
+        <a
+            href="https://wa.me/6287782214464"
+            target="_blank"
+            class="btn-wa">
+
+            💬 Hubungi via WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+<section id="tab-files" class="tab-content">
+
+    <div class="files-grid">
+
+        <div class="file-card">
+
+            <h2>
+
+                🖼️ Virtual Background
+
+            </h2>
+
+            <img
+                id="vb-preview"
+                class="vb-preview"
+                src=""
+                alt="Virtual Background">
+
+            <a
+                id="btn-vb"
+                class="btn-file"
+                href="#"
+                target="_blank">
+
+                Simpan Gambar
+
+            </a>
+
+        </div>
+
+        <div class="file-card">
+
+            <div class="file-icon">
+
+                📁
+
+            </div>
+
+            <h2>
+
+                File Pendukung
+
+            </h2>
+
+            <p>
+
+                Akses materi,
+                panduan,
+                atau file pendukung kegiatan
+                melalui Google Drive.
+
+            </p>
+
+            <a
+                id="link-files"
+                class="btn-file"
+                href="#"
+                target="_blank">
+
+                Buka Google Drive
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hotline-card">
+
+        <h3>
+
+            📞 Butuh Bantuan?
+
+        </h3>
+
+        <p>
+
+            Jika mengalami kendala presensi,
+            akses streaming,
+            file pendukung,
+            maupun sertifikat kegiatan,
+            silakan hubungi Panitia DTDP.
+
+        </p>
+
+        <a
+            href="https://wa.me/6287782214464"
+            target="_blank"
+            class="btn-wa">
+
+            💬 Hubungi via WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+<section id="tab-siaran" class="tab-content">
+
+    <div class="search-card">
+
+        <div class="icon-circle">
+
+            📡
+
+        </div>
+
+        <h2>
+
+            Ruang Siaran
+
+        </h2>
+
+        <p>
+
+            Silakan pilih platform di bawah ini
+            untuk bergabung ke dalam sesi
+            live streaming kegiatan.
+
+        </p>
+
+        <div class="siaran-grid">
+
+            <!-- ZOOM -->
+
+            <a
+                id="link-zoom"
+                class="siaran-card"
+                href="#"
+                target="_blank">
+
+                <div class="siaran-icon">
+
+                    <img
+                        src="https://img.icons8.com/?size=100&id=7csVZvHoQrLW&format=png&color=000000"
+                        alt="Zoom">
+
+                </div>
+
+                <h3>
+
+                    Zoom Meeting
+
+                </h3>
+
+                <p>
+
+                    Interaksi Langsung
+
+                </p>
+
+            </a>
+
+            <!-- YOUTUBE -->
+
+            <a
+                id="link-youtube"
+                class="siaran-card"
+                href="#"
+                target="_blank">
+
+                <div class="siaran-icon">
+
+                    <img
+                        src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                        alt="YouTube">
+
+                </div>
+
+                <h3>
+
+                    YouTube Live
+
+                </h3>
+
+                <p>
+
+                    Nonton Saja
+
+                </p>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hotline-card">
+
+        <h3>
+
+            📞 Butuh Bantuan?
+
+        </h3>
+
+        <p>
+
+            Jika mengalami kendala presensi,
+            akses streaming,
+            file pendukung,
+            maupun sertifikat kegiatan,
+            silakan hubungi Panitia DTDP.
+
+        </p>
+
+        <a
+            href="https://wa.me/6287782214464"
+            target="_blank"
+            class="btn-wa">
+
+            💬 Hubungi via WhatsApp
+
+        </a>
+
+    </div>
+
+</section>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../js/config.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/kegiatan.js"></script>
+
+</body>
+
+</html>
