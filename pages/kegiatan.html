@@ -5,17 +5,24 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0">
 
-<title>Portal Kegiatan DTDP</title>
+<title>
 
-<link rel="icon"
-      type="image/png"
-      href="../images/logo-lan.png">
+Portal Kegiatan DTDP
 
-<link rel="stylesheet"
-      href="../css/style.css">
+</title>
+
+<link
+    rel="icon"
+    type="image/png"
+    href="../images/logo-lan.png">
+
+<link
+    rel="stylesheet"
+    href="../css/kegiatan.css">
 
 </head>
 
@@ -23,11 +30,17 @@ content="width=device-width, initial-scale=1.0">
 
 <div class="app">
 
-<aside class="sidebar" id="sidebar">
+<!-- ===========================
+     SIDEBAR
+=========================== -->
+
+<aside
+    class="sidebar"
+    id="sidebar">
 
 <button
-class="toggle-sidebar"
-onclick="toggleSidebar()">
+    class="toggle-sidebar"
+    onclick="toggleSidebar()">
 
 ☰
 
@@ -36,9 +49,9 @@ onclick="toggleSidebar()">
 <div class="nav">
 
 <button
-class="nav-button active"
-id="btn-info"
-onclick="bukaTab('info')">
+    class="nav-button active"
+    id="btn-info"
+    onclick="bukaTab('info')">
 
 ℹ️
 <span>Informasi Kegiatan</span>
@@ -46,9 +59,9 @@ onclick="bukaTab('info')">
 </button>
 
 <button
-class="nav-button"
-id="btn-sertifikat"
-onclick="bukaTab('sertifikat')">
+    class="nav-button"
+    id="btn-sertifikat"
+    onclick="bukaTab('sertifikat')">
 
 📄
 <span>Sertifikat</span>
@@ -56,9 +69,9 @@ onclick="bukaTab('sertifikat')">
 </button>
 
 <button
-class="nav-button"
-id="btn-presensi"
-onclick="bukaTab('presensi')">
+    class="nav-button"
+    id="btn-presensi"
+    onclick="bukaTab('presensi')">
 
 📝
 <span>Presensi</span>
@@ -66,9 +79,9 @@ onclick="bukaTab('presensi')">
 </button>
 
 <button
-class="nav-button"
-id="btn-siaran"
-onclick="bukaTab('siaran')">
+    class="nav-button"
+    id="btn-siaran"
+    onclick="bukaTab('siaran')">
 
 📡
 <span>Akses Streaming</span>
@@ -76,9 +89,9 @@ onclick="bukaTab('siaran')">
 </button>
 
 <button
-class="nav-button"
-id="btn-files"
-onclick="bukaTab('files')">
+    class="nav-button"
+    id="btn-files"
+    onclick="bukaTab('files')">
 
 📁
 <span>Files</span>
@@ -89,6 +102,10 @@ onclick="bukaTab('files')">
 
 </aside>
 
+<!-- ===========================
+     MAIN
+=========================== -->
+
 <main class="main">
 
 <div class="content-header">
@@ -96,8 +113,8 @@ onclick="bukaTab('files')">
 <div class="logo-container">
 
 <img
-src="../images/logo-lan.png"
-alt="Logo LAN">
+    src="../images/logo-lan.png"
+    alt="Logo LAN">
 
 </div>
 
@@ -121,136 +138,30 @@ Lembaga Administrasi Negara
 
 <div class="page">
 
-<div style="margin-bottom:20px;">
-
-<a
-href="home.html"
-class="btn-file">
-
-← Kembali ke Daftar Kegiatan
-
-</a>
-
-</div>
+<!-- ===================================================
+     TAB INFORMASI
+=================================================== -->
 
 <section
-id="tab-sertifikat"
-class="tab-content">
-
-<div class="search-card">
-
-<div class="icon-circle">
-
-📄
-
-</div>
-
-<h2>
-
-Pencarian Sertifikat Kegiatan
-
-</h2>
-
-<p class="notice">
-
-<strong>
-
-SERTIFIKAT TERSEDIA MINIMAL
-H+14 KERJA SETELAH
-PELAKSANAAN WEBINAR.
-
-</strong>
-
-</p>
-
-<p class="description">
-
-Masukkan nama peserta
-untuk mencari sertifikat
-kegiatan yang telah diikuti.
-
-Pastikan nama yang dimasukkan
-sesuai dengan data pendaftaran.
-
-</p>
-
-<div class="search-row">
-
-<input
-id="keyword"
-placeholder="Masukkan nama peserta">
-
-<button
-onclick="cari()">
-
-Cari Sertifikat
-
-</button>
-
-</div>
-
-</div>
-
-<div id="hasil"></div>
-
-<div class="footer-note">
-
-Pastikan nama yang dimasukkan
-sesuai dengan data pendaftaran.
-
-Jika sertifikat belum tersedia,
-silakan cek kembali secara berkala
-atau hubungi panitia kegiatan.
-
-</div>
-
-<div class="hotline-card">
-
-<h3>
-
-📞 Butuh Bantuan?
-
-</h3>
-
-<p>
-
-Jika mengalami kendala
-presensi,
-akses streaming,
-file pendukung,
-maupun sertifikat kegiatan,
-silakan hubungi
-Panitia DTDP.
-
-</p>
-
-<a
-href="https://wa.me/6287782214464"
-target="_blank"
-class="btn-wa">
-
-💬 Hubungi via WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-<section
-id="tab-info"
-class="tab-content active">
+    id="tab-info"
+    class="tab-content active">
 
 <div class="info-layout">
+
+<!-- Flyer -->
 
 <div class="flyer-card">
 
 <img
-id="info-flyer"
-src=""
-alt="Flyer Kegiatan">
+    id="info-flyer"
+    src=""
+    alt="Flyer Kegiatan">
 
 </div>
+
+<!-- Kolom Kanan -->
+
+<div class="info-side">
 
 <div class="info-side-card">
 
@@ -269,8 +180,8 @@ Tanggal
 </div>
 
 <div
-class="info-value"
-id="info-tanggal">
+    class="info-value"
+    id="info-tanggal">
 
 -
 
@@ -287,14 +198,24 @@ Waktu
 </div>
 
 <div
-class="info-value"
-id="info-waktu">
+    class="info-value"
+    id="info-waktu">
 
 -
 
 </div>
 
 </div>
+
+</div>
+
+<a
+    href="home.html"
+    class="back-button">
+
+← Kembali ke Daftar Kegiatan
+
+</a>
 
 </div>
 
@@ -326,20 +247,18 @@ Deskripsi Kegiatan
 
 <p>
 
-Jika mengalami kendala
-presensi,
+Jika mengalami kendala presensi,
 akses streaming,
 file pendukung,
 maupun sertifikat kegiatan,
-silakan hubungi
-Panitia DTDP.
+silakan hubungi Panitia DTDP.
 
 </p>
 
 <a
-href="https://wa.me/6287782214464"
-target="_blank"
-class="btn-wa">
+    href="https://wa.me/6287782214464"
+    target="_blank"
+    class="btn-wa">
 
 💬 Hubungi via WhatsApp
 
@@ -349,282 +268,423 @@ class="btn-wa">
 
 </section>
 
-<section id="tab-presensi" class="tab-content">
+<!-- ===================================================
+     TAB SERTIFIKAT
+=================================================== -->
 
-    <div class="search-card">
+<section
+    id="tab-sertifikat"
+    class="tab-content">
 
-        <div class="icon-circle">
-            📝
-        </div>
+<div class="search-card">
 
-        <h2>Presensi Kegiatan</h2>
+<div class="icon-circle">
 
-        <p>
-            Silakan mengisi daftar hadir kegiatan melalui tautan presensi berikut.
-        </p>
+📄
+
+</div>
+
+<h2>
+
+Pencarian Sertifikat Kegiatan
+
+</h2>
+
+<p class="notice">
+
+<strong>
+
+SERTIFIKAT TERSEDIA MINIMAL
+H+14 KERJA
+SETELAH PELAKSANAAN WEBINAR.
+
+</strong>
+
+</p>
+
+<p class="description">
+
+Masukkan nama peserta
+untuk mencari sertifikat kegiatan.
+
+Pastikan nama sesuai
+dengan data pendaftaran.
+
+</p>
+
+<div class="search-row">
+
+<input
+    id="keyword"
+    placeholder="Masukkan nama peserta">
+
+<button
+    onclick="cari()">
+
+Cari Sertifikat
+
+</button>
+
+</div>
+
+</div>
+
+<div id="hasil"></div>
+
+<div class="footer-note">
+
+Pastikan nama yang dimasukkan
+sesuai dengan data pendaftaran.
+
+Jika sertifikat belum tersedia,
+silakan cek kembali secara berkala
+atau hubungi panitia.
+
+</div>
+
+<div class="hotline-card">
+
+<h3>
+
+📞 Butuh Bantuan?
+
+</h3>
+
+<p>
+
+Jika mengalami kendala,
+silakan hubungi Panitia DTDP.
+
+</p>
+
+<a
+    href="https://wa.me/6287782214464"
+    target="_blank"
+    class="btn-wa">
+
+💬 Hubungi via WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ===================================================
+     TAB PRESENSI
+=================================================== -->
+
+<section
+    id="tab-presensi"
+    class="tab-content">
+
+<div class="search-card">
+
+<div class="icon-circle">
+
+📝
+
+</div>
+
+<h2>
+
+Presensi Kegiatan
+
+</h2>
+
+<p>
+
+Silakan mengisi daftar hadir kegiatan
+melalui tautan presensi berikut.
+
+</p>
+
+<a
+    id="link-presensi"
+    href="#"
+    target="_blank"
+    class="btn-presensi">
+
+Isi Presensi
+
+</a>
+
+</div>
+
+<div class="footer-note">
+
+Pastikan data presensi diisi dengan benar
+karena akan digunakan untuk kebutuhan
+administrasi kegiatan.
+
+</div>
+
+<div class="hotline-card">
+
+<h3>
+
+📞 Butuh Bantuan?
+
+</h3>
+
+<p>
+
+Jika mengalami kendala presensi,
+akses streaming,
+file pendukung,
+maupun sertifikat kegiatan,
+silakan hubungi
+Panitia DTDP.
+
+</p>
+
+<a
+    href="https://wa.me/6287782214464"
+    target="_blank"
+    class="btn-wa">
+
+💬 Hubungi via WhatsApp
+
+</a>
+
+</div>
+
+</section>
+
+<!-- ===================================================
+     TAB FILES
+=================================================== -->
+
+<section
+    id="tab-files"
+    class="tab-content">
+
+<div class="files-grid">
+
+    <!-- Virtual Background -->
+
+    <div class="file-card">
+
+        <h2>
+
+            🖼️ Virtual Background
+
+        </h2>
+
+        <img
+            id="vb-preview"
+            class="vb-preview"
+            src=""
+            alt="Virtual Background">
 
         <a
-            id="link-presensi"
-            class="btn-presensi"
+            id="btn-vb"
             href="#"
-            target="_blank">
-
-            Isi Presensi
-
-        </a>
-
-    </div>
-
-    <div class="footer-note">
-
-        Pastikan data presensi diisi dengan benar karena akan digunakan
-        untuk kebutuhan administrasi kegiatan.
-
-    </div>
-
-    <div class="hotline-card">
-
-        <h3>📞 Butuh Bantuan?</h3>
-
-        <p>
-
-            Jika mengalami kendala presensi,
-            akses streaming,
-            file pendukung,
-            maupun sertifikat kegiatan,
-            silakan hubungi Panitia DTDP.
-
-        </p>
-
-        <a
-            href="https://wa.me/6287782214464"
             target="_blank"
-            class="btn-wa">
+            class="btn-file">
 
-            💬 Hubungi via WhatsApp
-
-        </a>
-
-    </div>
-
-</section>
-
-<section id="tab-files" class="tab-content">
-
-    <div class="files-grid">
-
-        <div class="file-card">
-
-            <h2>
-
-                🖼️ Virtual Background
-
-            </h2>
-
-            <img
-                id="vb-preview"
-                class="vb-preview"
-                src=""
-                alt="Virtual Background">
-
-            <a
-                id="btn-vb"
-                class="btn-file"
-                href="#"
-                target="_blank">
-
-                Simpan Gambar
-
-            </a>
-
-        </div>
-
-        <div class="file-card">
-
-            <div class="file-icon">
-
-                📁
-
-            </div>
-
-            <h2>
-
-                File Pendukung
-
-            </h2>
-
-            <p>
-
-                Akses materi,
-                panduan,
-                atau file pendukung kegiatan
-                melalui Google Drive.
-
-            </p>
-
-            <a
-                id="link-files"
-                class="btn-file"
-                href="#"
-                target="_blank">
-
-                Buka Google Drive
-
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="hotline-card">
-
-        <h3>
-
-            📞 Butuh Bantuan?
-
-        </h3>
-
-        <p>
-
-            Jika mengalami kendala presensi,
-            akses streaming,
-            file pendukung,
-            maupun sertifikat kegiatan,
-            silakan hubungi Panitia DTDP.
-
-        </p>
-
-        <a
-            href="https://wa.me/6287782214464"
-            target="_blank"
-            class="btn-wa">
-
-            💬 Hubungi via WhatsApp
+            Simpan Gambar
 
         </a>
 
     </div>
 
-</section>
+    <!-- File Pendukung -->
 
-<section id="tab-siaran" class="tab-content">
+    <div class="file-card">
 
-    <div class="search-card">
+        <div class="file-icon">
 
-        <div class="icon-circle">
-
-            📡
+            📁
 
         </div>
 
         <h2>
 
-            Ruang Siaran
+            File Pendukung
 
         </h2>
 
         <p>
 
-            Silakan pilih platform di bawah ini
-            untuk bergabung ke dalam sesi
-            live streaming kegiatan.
-
-        </p>
-
-        <div class="siaran-grid">
-
-            <!-- ZOOM -->
-
-            <a
-                id="link-zoom"
-                class="siaran-card"
-                href="#"
-                target="_blank">
-
-                <div class="siaran-icon">
-
-                    <img
-                        src="https://img.icons8.com/?size=100&id=7csVZvHoQrLW&format=png&color=000000"
-                        alt="Zoom">
-
-                </div>
-
-                <h3>
-
-                    Zoom Meeting
-
-                </h3>
-
-                <p>
-
-                    Interaksi Langsung
-
-                </p>
-
-            </a>
-
-            <!-- YOUTUBE -->
-
-            <a
-                id="link-youtube"
-                class="siaran-card"
-                href="#"
-                target="_blank">
-
-                <div class="siaran-icon">
-
-                    <img
-                        src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-                        alt="YouTube">
-
-                </div>
-
-                <h3>
-
-                    YouTube Live
-
-                </h3>
-
-                <p>
-
-                    Nonton Saja
-
-                </p>
-
-            </a>
-
-        </div>
-
-    </div>
-
-    <div class="hotline-card">
-
-        <h3>
-
-            📞 Butuh Bantuan?
-
-        </h3>
-
-        <p>
-
-            Jika mengalami kendala presensi,
-            akses streaming,
-            file pendukung,
-            maupun sertifikat kegiatan,
-            silakan hubungi Panitia DTDP.
+            Akses materi,
+            panduan,
+            maupun file pendukung kegiatan
+            melalui Google Drive.
 
         </p>
 
         <a
-            href="https://wa.me/6287782214464"
+            id="link-files"
+            href="#"
             target="_blank"
-            class="btn-wa">
+            class="btn-file">
 
-            💬 Hubungi via WhatsApp
+            Buka Google Drive
 
         </a>
 
     </div>
+
+</div>
+
+<div class="hotline-card">
+
+    <h3>
+
+        📞 Butuh Bantuan?
+
+    </h3>
+
+    <p>
+
+        Jika mengalami kendala presensi,
+        akses streaming,
+        file pendukung,
+        maupun sertifikat kegiatan,
+        silakan hubungi
+        Panitia DTDP.
+
+    </p>
+
+    <a
+        href="https://wa.me/6287782214464"
+        target="_blank"
+        class="btn-wa">
+
+        💬 Hubungi via WhatsApp
+
+    </a>
+
+</div>
+
+</section>
+
+<!-- ===================================================
+     TAB SIARAN
+=================================================== -->
+
+<section
+    id="tab-siaran"
+    class="tab-content">
+
+<div class="search-card">
+
+<div class="icon-circle">
+
+📡
+
+</div>
+
+<h2>
+
+Ruang Siaran
+
+</h2>
+
+<p>
+
+Silakan pilih platform di bawah ini
+untuk bergabung ke dalam sesi
+live streaming kegiatan.
+
+</p>
+
+<div class="siaran-grid">
+
+<!-- Zoom -->
+
+<a
+    id="link-zoom"
+    href="#"
+    target="_blank"
+    class="siaran-card">
+
+<div class="siaran-icon">
+
+<img
+src="https://img.icons8.com/?size=100&id=7csVZvHoQrLW&format=png&color=000000"
+alt="Zoom">
+
+</div>
+
+<h3>
+
+Zoom Meeting
+
+</h3>
+
+<p>
+
+Interaksi Langsung
+
+</p>
+
+</a>
+
+<!-- YouTube -->
+
+<a
+    id="link-youtube"
+    href="#"
+    target="_blank"
+    class="siaran-card">
+
+<div class="siaran-icon">
+
+<img
+src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+alt="YouTube">
+
+</div>
+
+<h3>
+
+YouTube Live
+
+</h3>
+
+<p>
+
+Nonton Saja
+
+</p>
+
+</a>
+
+</div>
+
+</div>
+
+<div class="hotline-card">
+
+<h3>
+
+📞 Butuh Bantuan?
+
+</h3>
+
+<p>
+
+Jika mengalami kendala presensi,
+akses streaming,
+file pendukung,
+maupun sertifikat kegiatan,
+silakan hubungi
+Panitia DTDP.
+
+</p>
+
+<a
+    href="https://wa.me/6287782214464"
+    target="_blank"
+    class="btn-wa">
+
+💬 Hubungi via WhatsApp
+
+</a>
+
+</div>
 
 </section>
 

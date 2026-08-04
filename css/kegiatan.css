@@ -8,26 +8,42 @@
     box-sizing:border-box;
 }
 
-html{
+:root{
 
-    scroll-behavior:smooth;
+    --primary:#0B2E6F;
+    --primary-hover:#0D6EFD;
+
+    --background:#F5F8FD;
+
+    --text:#1F2937;
+    --text-light:#526277;
+
+    --white:#FFFFFF;
+
+    --border:#E5E7EB;
+
+    --shadow:
+        0 8px 24px rgba(15,23,42,.06);
 
 }
 
 body{
 
     font-family:
-        "Segoe UI",
-        Tahoma,
-        Geneva,
-        Verdana,
+        Arial,
         sans-serif;
 
-    background:#F4F7FB;
+    margin:0;
 
-    color:#1F2937;
+    color:var(--text);
 
-    line-height:1.6;
+    background:
+        linear-gradient(
+            180deg,
+            #EEF6FF 0%,
+            #FFFFFF 45%,
+            #F8FBFF 100%
+        );
 
 }
 
@@ -43,19 +59,39 @@ body{
 
 }
 
+.main{
+
+    flex:1;
+
+    padding:
+        32px
+        28px;
+
+}
+
+.page{
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
 /* =====================================================
    SIDEBAR
 ===================================================== */
 
 .sidebar{
 
-    width:250px;
+    width:220px;
 
-    background:#FFFFFF;
+    background:white;
 
-    border-right:1px solid #E5E7EB;
+    border-right:1px solid var(--border);
 
-    padding:28px 20px;
+    padding:
+        24px
+        12px;
 
     position:sticky;
 
@@ -63,20 +99,62 @@ body{
 
     height:100vh;
 
-    box-shadow:
+    overflow:hidden;
 
-        6px 0 24px
-        rgba(15,94,168,.06);
+    transition:.3s;
 
-    z-index:20;
+}
+
+.sidebar.closed{
+
+    width:70px;
+
+}
+
+.sidebar.closed .nav-button span{
+
+    display:none;
 
 }
 
 .toggle-sidebar{
 
-    display:none;
+    width:42px;
+
+    height:42px;
+
+    border-radius:12px;
+
+    background:white;
+
+    color:var(--primary);
+
+    border:1px solid var(--border);
+
+    box-shadow:
+        0 8px 18px rgba(15,23,42,.08);
+
+    margin-bottom:18px;
+
+    padding:0;
+
+    cursor:pointer;
+
+    font-size:20px;
 
 }
+
+.sidebar.closed .nav-button{
+
+    text-align:center;
+
+    padding:14px 0;
+
+}
+
+/* =====================================================
+   NAVIGATION
+===================================================== */
 
 .nav{
 
@@ -84,73 +162,37 @@ body{
 
     flex-direction:column;
 
-    gap:12px;
+    gap:10px;
 
 }
 
 .nav-button{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
     width:100%;
-
-    border:none;
-
     background:transparent;
-
-    border-radius:14px;
-
-    padding:15px 18px;
-
-    cursor:pointer;
-
-    text-align:left;
-
     color:#475569;
-
+    border:none;
+    box-shadow:none;
+    padding:14px 16px;
+    border-radius:12px;
+    cursor:pointer;
     font-size:15px;
-
     font-weight:600;
-
-    transition:.25s;
-
+    text-align:left;
+    display:flex;
+    align-items:center;
+    gap:12px;
 }
 
 .nav-button:hover{
-
-    background:#EFF6FF;
-
-    color:#0F5EA8;
-
+    background:#eef6ff;
+    color:#0d6efd;
+    transform:none;
 }
 
 .nav-button.active{
-
-    background:#0F5EA8;
-
-    color:white;
-
-    box-shadow:
-
-        0 8px 22px
-        rgba(15,94,168,.25);
-
-}
-
-/* =====================================================
-   MAIN
-===================================================== */
-
-.main{
-
-    flex:1;
-
-    padding:32px;
-
+    background:#e8f1ff;
+    color:#0d6efd;
+    border-left:4px solid #0d6efd;
 }
 
 /* =====================================================
@@ -163,84 +205,497 @@ body{
 
     align-items:center;
 
-    gap:22px;
+    gap:18px;
 
-    background:white;
-
-    border-radius:22px;
-
-    padding:22px 28px;
-
-    box-shadow:
-
-        0 10px 30px
-        rgba(15,94,168,.08);
+    margin-bottom:30px;
 
 }
 
 .logo-container{
 
-    width:78px;
+    width:70px;
 
-    height:78px;
+    height:70px;
+
+    border-radius:16px;
+
+    overflow:hidden;
+
+    background:white;
+
+    padding:6px;
 
     flex-shrink:0;
+
+    box-shadow:
+        0 10px 25px rgba(13,110,253,.15);
 
 }
 
 .logo-container img{
 
-    width:100%;
+    width:140%;
 
-    height:100%;
+    height:140%;
 
     object-fit:contain;
+
+    transform:
+        translate(-14%,-14%);
 
 }
 
 .header-title h1{
 
+    margin:0;
+
+    color:var(--primary);
+
     font-size:28px;
 
-    color:#0F5EA8;
-
-    margin-bottom:4px;
+    line-height:1.25;
 
 }
 
 .header-title p{
 
-    color:#64748B;
+    margin-top:6px;
+
+    color:var(--text-light);
 
     font-size:15px;
 
 }
 
 /* =====================================================
-   PAGE
+   TAB
 ===================================================== */
 
-.page{
+.tab-content{
+
+    display:none;
+
+}
+
+.tab-content.active{
+
+    display:block;
+
+}
+
+/* =====================================================
+   SEARCH CARD
+===================================================== */
+
+.search-card{
+
+    background:var(--white);
+
+    border-radius:20px;
+
+    padding:34px;
+
+    box-shadow:
+        0 18px 45px rgba(15,23,42,.10);
+
+    border:1px solid #E5EEFB;
+
+    margin-bottom:30px;
+
+    text-align:center;
+
+}
+
+.icon-circle{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:50%;
+
+    background:#E8F1FF;
+
+    color:#0D6EFD;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin:0 auto 18px;
+
+    font-size:34px;
+
+}
+
+.search-card h2{
+    margin:20px 0 14px;
+    font-size:48px;
+    color:#0b2e6f;
+    font-weight:700;
+    line-height:1.2;
+}
+
+.search-card p{
+    margin:0 auto 30px;
+    max-width:760px;
+    color:#526277;
+    font-size:20px;
+    line-height:1.7;
+}
+.notice{
+
+    margin:18px 0 10px;
+
+    color:#D32F2F;
+
+    font-size:15px;
+
+    line-height:1.6;
+
+    text-align:center;
+
+}
+
+.notice strong{
+
+    font-weight:700;
+
+}
+
+.description{
+
+    max-width:620px;
+
+    margin:0 auto;
+
+    color:#555;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+}
+
+.search-row{
+
+    display:flex;
+
+    gap:12px;
 
     margin-top:28px;
 
 }
 
+.search-row input{
+
+    flex:1;
+
+}
+
+input{
+
+    width:100%;
+
+    height:50px;
+
+    padding:0 16px;
+
+    border:1px solid #CBD5E1;
+
+    border-radius:10px;
+
+    outline:none;
+
+    background:white;
+
+    color:#111827;
+
+    font-size:15px;
+
+    transition:.25s;
+
+}
+
+input:focus{
+
+    border-color:#0D6EFD;
+
+    box-shadow:
+        0 0 0 4px rgba(13,110,253,.12);
+
+}
+
+button{
+
+    height:50px;
+
+    border:none;
+
+    border-radius:10px;
+
+    padding:0 24px;
+
+    background:#0D6EFD;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    white-space:nowrap;
+
+    transition:.25s;
+
+    box-shadow:
+        0 8px 18px rgba(13,110,253,.25);
+
+}
+
+button:hover{
+
+    background:#0B5ED7;
+
+}
+
 /* =====================================================
-   INFO LAYOUT
+   HASIL
+===================================================== */
+
+#hasil{
+
+    margin-top:26px;
+
+}
+
+.hasil-info{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+    color:var(--primary);
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.result-card{
+
+    display:grid;
+
+    grid-template-columns:
+        1fr auto;
+
+    gap:20px;
+
+    align-items:center;
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:20px;
+
+    margin-bottom:16px;
+
+    box-shadow:var(--shadow);
+
+}
+
+.result-data{
+
+    display:grid;
+
+    grid-template-columns:
+        120px 1fr;
+
+    gap:
+        10px
+        16px;
+
+}
+
+.label{
+
+    color:#64748B;
+
+    font-size:14px;
+
+}
+
+.value{
+
+    color:#111827;
+
+    font-size:15px;
+
+    line-height:1.5;
+
+    font-weight:500;
+
+}
+
+.event-badge{
+
+    display:inline;
+
+    padding:0;
+
+    background:none;
+
+    font-weight:600;
+
+}
+
+.action{
+
+    text-align:center;
+
+    min-width:190px;
+
+}
+
+.btn-download,
+.btn-presensi{
+
+    display:inline-block;
+
+    background:#198754;
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:
+        11px
+        18px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    transition:.25s;
+
+}
+
+.btn-download:hover,
+.btn-presensi:hover{
+
+    background:#157347;
+
+}
+
+.status-proses{
+
+    display:inline-block;
+
+    background:#FFF3CD;
+
+    color:#856404;
+
+    padding:
+        11px
+        18px;
+
+    border-radius:10px;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.empty-state{
+
+    background:white;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    padding:24px;
+
+    color:#64748B;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+}
+
+/* =====================================================
+   FOOTER NOTE
+===================================================== */
+
+.footer-note{
+
+    margin-top:30px;
+
+    padding:
+        20px
+        22px;
+
+    background:#EAF4FF;
+
+    border-radius:16px;
+
+    color:#334155;
+
+    font-size:14px;
+
+    line-height:1.7;
+
+}
+
+/* =====================================================
+   INFORMASI KEGIATAN
 ===================================================== */
 
 .info-layout{
 
     display:grid;
 
-    grid-template-columns:
-        380px
-        1fr;
+    grid-template-columns:2fr 1fr;
 
-    gap:28px;
+    gap:24px;
 
     align-items:start;
+
+}
+
+/* =====================================================
+   CARD
+===================================================== */
+
+.flyer-card,
+.info-side-card,
+.desc-card,
+.file-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    box-shadow:
+        0 8px 24px rgba(15,23,42,.06);
 
 }
 
@@ -250,78 +705,67 @@ body{
 
 .flyer-card{
 
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
+    padding:22px;
 
 }
 
 .flyer-card img{
 
-    display:block;
-
     width:100%;
 
-    height:auto;
+    border-radius:14px;
 
-    transition:.35s;
-
-}
-
-.flyer-card:hover img{
-
-    transform:scale(1.02);
+    display:block;
 
 }
 
 /* =====================================================
-   INFO CARD
+   KOLOM KANAN
+===================================================== */
+
+.info-side{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:18px;
+
+}
+
+/* =====================================================
+   INFORMASI
 ===================================================== */
 
 .info-side-card{
 
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:34px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
+    padding:24px;
 
 }
 
 .info-side-card h2{
 
-    font-size:30px;
+    margin:0;
 
-    color:#0F5EA8;
+    color:#0B2E6F;
+
+    font-size:28px;
 
     line-height:1.35;
 
-    margin-bottom:28px;
+    margin-bottom:24px;
 
 }
 
 .info-item{
 
-    padding:18px 0;
-
-    border-bottom:
-        1px solid #EEF2F7;
+    margin-bottom:20px;
 
 }
 
 .info-item:last-child{
 
-    border-bottom:none;
+    margin-bottom:0;
 
 }
 
@@ -337,11 +781,58 @@ body{
 
 .info-value{
 
-    color:#111827;
+    color:#1F2937;
 
-    font-size:18px;
+    font-size:20px;
+
+    font-weight:700;
+
+    line-height:1.5;
+
+}
+
+/* =====================================================
+   BUTTON KEMBALI
+===================================================== */
+
+.back-button{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:100%;
+
+    height:50px;
+
+    border-radius:12px;
+
+    background:#0D6EFD;
+
+    color:#FFFFFF;
+
+    text-decoration:none;
+
+    font-size:15px;
 
     font-weight:600;
+
+    box-shadow:
+        0 8px 18px rgba(13,110,253,.20);
+
+    transition:.25s;
+
+}
+
+.back-button:hover{
+
+    background:#0B5ED7;
+
+    color:#FFFFFF;
+
+    transform:translateY(-2px);
 
 }
 
@@ -351,313 +842,29 @@ body{
 
 .desc-card{
 
-    margin-top:28px;
+    margin-top:24px;
 
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:34px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
+    padding:24px;
 
 }
 
 .desc-card h3{
 
-    color:#0F5EA8;
+    margin:0 0 16px;
+
+    color:#0B2E6F;
 
     font-size:24px;
-
-    margin-bottom:18px;
 
 }
 
 .desc-card p{
 
-    color:#4B5563;
-
-    line-height:1.9;
-
-    text-align:justify;
-
-}
-
-/* =====================================================
-   HOTLINE
-===================================================== */
-
-.hotline-card{
-
-    margin-top:28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #0F5EA8,
-            #2563EB
-        );
-
-    color:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:32px;
-
-    box-shadow:
-        0 12px 35px
-        rgba(15,94,168,.18);
-
-}
-
-.hotline-card h3{
-
-    font-size:24px;
-
-    margin-bottom:12px;
-
-}
-
-.hotline-card p{
-
-    opacity:.95;
+    color:#475569;
 
     line-height:1.8;
 
-}
-
-.btn-wa{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    margin-top:22px;
-
-    padding:
-        14px
-        26px;
-
-    border-radius:999px;
-
-    background:#25D366;
-
-    color:white;
-
-    text-decoration:none;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.btn-wa:hover{
-
-    transform:translateY(-2px);
-
-    background:#1EBE5D;
-
-}
-
-/* =====================================================
-   SEARCH CARD
-===================================================== */
-
-.search-card{
-
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:34px;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
-
-}
-
-.icon-circle{
-
-    width:74px;
-
-    height:74px;
-
-    border-radius:20px;
-
-    background:#EFF6FF;
-
-    color:#2563EB;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:34px;
-
-    margin-bottom:24px;
-
-}
-
-.search-card h2{
-
-    color:#0F5EA8;
-
-    font-size:28px;
-
-    margin-bottom:12px;
-
-}
-
-.notice{
-
-    margin-bottom:16px;
-
-    color:#DC2626;
-
-}
-
-.description{
-
-    color:#64748B;
-
-    margin-bottom:24px;
-
-}
-
-.search-row{
-
-    display:flex;
-
-    gap:16px;
-
-}
-
-.search-row input{
-
-    flex:1;
-
-    height:54px;
-
-    border:1px solid #D1D5DB;
-
-    border-radius:14px;
-
-    padding:0 18px;
-
     font-size:15px;
-
-    outline:none;
-
-    transition:.25s;
-
-}
-
-.search-row input:focus{
-
-    border-color:#2563EB;
-
-    box-shadow:
-        0 0 0 4px
-        rgba(37,99,235,.10);
-
-}
-
-.search-row button{
-
-    height:54px;
-
-    border:none;
-
-    border-radius:14px;
-
-    background:#0F5EA8;
-
-    color:white;
-
-    padding:0 28px;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-    transition:.25s;
-
-}
-
-.search-row button:hover{
-
-    background:#2563EB;
-
-}
-
-/* =====================================================
-   SIARAN
-===================================================== */
-
-.siaran-grid{
-
-    display:grid;
-
-    grid-template-columns:
-        repeat(2,1fr);
-
-    gap:24px;
-
-    margin-top:30px;
-
-}
-
-.siaran-card{
-
-    background:#FFFFFF;
-
-    border-radius:22px;
-
-    padding:32px;
-
-    text-align:center;
-
-    text-decoration:none;
-
-    color:#1F2937;
-
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
-
-    transition:.25s;
-
-}
-
-.siaran-card:hover{
-
-    transform:translateY(-4px);
-
-}
-
-.siaran-icon{
-
-    width:82px;
-
-    height:82px;
-
-    margin:auto;
-
-    margin-bottom:20px;
-
-}
-
-.siaran-icon img{
-
-    width:100%;
 
 }
 
@@ -669,8 +876,7 @@ body{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(2,1fr);
+    grid-template-columns:1fr 1fr;
 
     gap:24px;
 
@@ -678,23 +884,39 @@ body{
 
 .file-card{
 
-    background:#FFFFFF;
+    padding:24px;
 
-    border-radius:22px;
+    text-align:center;
 
-    padding:32px;
+}
 
-    box-shadow:
-        0 10px 30px
-        rgba(15,94,168,.08);
+.file-card h2{
+
+    color:#0B2E6F;
+
+    font-size:24px;
+
+    margin-bottom:18px;
+
+}
+
+.file-card p{
+
+    color:#526277;
+
+    font-size:15px;
+
+    line-height:1.7;
+
+    margin-bottom:22px;
 
 }
 
 .file-icon{
 
-    font-size:54px;
+    font-size:44px;
 
-    margin-bottom:18px;
+    margin-bottom:14px;
 
 }
 
@@ -702,16 +924,17 @@ body{
 
     width:100%;
 
-    border-radius:18px;
+    border-radius:14px;
 
-    margin:
-        22px 0;
+    margin:18px 0 24px;
 
 }
 
-.btn-file,
-.btn-presensi,
-.btn-primary{
+/* =====================================================
+   BUTTON FILE
+===================================================== */
+
+.btn-file{
 
     display:inline-flex;
 
@@ -719,109 +942,169 @@ body{
 
     justify-content:center;
 
-    text-decoration:none;
+    width:100%;
 
-    background:#0F5EA8;
+    height:48px;
+
+    background:#0D6EFD;
 
     color:white;
 
-    padding:
-        14px
-        24px;
+    text-decoration:none;
 
-    border-radius:14px;
+    font-size:15px;
 
-    margin-top:20px;
+    font-weight:600;
+
+    border-radius:10px;
+
+    transition:.25s;
+
+    box-shadow:
+        0 8px 18px rgba(13,110,253,.18);
+
+}
+
+.btn-file:hover{
+
+    background:#0B5ED7;
+
+    color:white;
+
+}
+
+/* =====================================================
+   STREAMING
+===================================================== */
+
+.siaran-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:24px;
+
+    max-width:760px;
+
+    margin:30px auto 0;
+
+}
+
+.siaran-card{
+
+    background:white;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:20px;
+
+    padding:34px 24px;
+
+    text-align:center;
+
+    text-decoration:none;
+
+    color:#1F2937;
+
+    box-shadow:
+        0 8px 24px rgba(15,23,42,.06);
 
     transition:.25s;
 
 }
 
-.btn-file:hover,
-.btn-presensi:hover,
-.btn-primary:hover{
+.siaran-card:hover{
 
-    background:#2563EB;
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 14px 30px rgba(15,23,42,.12);
+
+}
+
+.siaran-icon{
+
+    margin-bottom:18px;
+
+}
+
+.siaran-icon img{
+
+    width:68px;
+
+    height:68px;
+
+    object-fit:contain;
+
+}
+
+.siaran-card h3{
+
+    margin:0 0 8px;
+
+    color:#0B2E6F;
+
+    font-size:22px;
+
+}
+
+.siaran-card p{
+
+    margin:0;
+
+    color:#64748B;
 
 }
 
 /* =====================================================
-   HASIL PENCARIAN
+   HOTLINE
 ===================================================== */
 
-.hasil-info{
+.hotline-card{
 
-    margin:24px 0;
+    margin-top:30px;
 
-    color:#64748B;
+    background:white;
 
-    font-weight:600;
-
-}
-
-.result-card{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    gap:24px;
-
-    align-items:center;
-
-    background:#FFFFFF;
+    border:1px solid #E5E7EB;
 
     border-radius:20px;
 
     padding:26px;
 
-    margin-bottom:18px;
+    text-align:center;
 
     box-shadow:
-        0 8px 24px
-        rgba(15,94,168,.08);
+        0 8px 24px rgba(15,23,42,.06);
 
 }
 
-.result-data{
+.hotline-card h3{
 
-    flex:1;
+    color:#0B2E6F;
 
-}
+    margin-bottom:12px;
 
-.result-data .label{
-
-    color:#64748B;
-
-    font-size:13px;
-
-    margin-top:10px;
+    font-size:24px;
 
 }
 
-.result-data .value{
+.hotline-card p{
 
-    margin-top:4px;
+    color:#526277;
 
-}
+    line-height:1.7;
 
-.event-badge{
-
-    display:inline-block;
-
-    padding:
-        6px
-        12px;
-
-    border-radius:999px;
-
-    background:#EFF6FF;
-
-    font-weight:600;
+    margin-bottom:20px;
 
 }
 
-.btn-download{
+/* =====================================================
+   BUTTON WHATSAPP
+===================================================== */
+
+.btn-wa{
 
     display:inline-flex;
 
@@ -829,113 +1112,31 @@ body{
 
     justify-content:center;
 
-    background:#16A34A;
+    height:48px;
+
+    padding:0 24px;
+
+    border-radius:10px;
+
+    background:#25D366;
 
     color:white;
 
     text-decoration:none;
 
-    padding:
-        12px
-        20px;
-
-    border-radius:12px;
-
-}
-
-.status-proses{
-
-    color:#D97706;
+    font-size:15px;
 
     font-weight:600;
 
-}
-
-.empty-state{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:40px;
-
-    text-align:center;
-
-    color:#64748B;
-
-    box-shadow:
-        0 8px 24px
-        rgba(15,94,168,.08);
+    transition:.25s;
 
 }
 
-/* =====================================================
-   FOOTER NOTE
-===================================================== */
+.btn-wa:hover{
 
-.footer-note{
+    background:#1EBE5D;
 
-    margin-top:24px;
-
-    color:#64748B;
-
-    font-size:14px;
-
-}
-
-/* =====================================================
-   LOADING
-===================================================== */
-
-.loading-overlay{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(255,255,255,.88);
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
-
-    z-index:9999;
-
-}
-
-.spinner{
-
-    width:60px;
-
-    height:60px;
-
-    border:5px solid #E5E7EB;
-
-    border-top-color:#2563EB;
-
-    border-radius:50%;
-
-    animation:spin .8s linear infinite;
-
-}
-
-.hidden{
-
-    display:none !important;
-
-}
-
-@keyframes spin{
-
-    to{
-
-        transform:rotate(360deg);
-
-    }
+    color:white;
 
 }
 
@@ -943,7 +1144,29 @@ body{
    RESPONSIVE
 ===================================================== */
 
-@media(max-width:992px){
+@media(max-width:1024px){
+
+    .page{
+
+        max-width:100%;
+
+    }
+
+    .info-layout{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .files-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:820px){
 
     .app{
 
@@ -963,6 +1186,8 @@ body{
 
         border-bottom:1px solid #E5E7EB;
 
+        padding:16px;
+
     }
 
     .nav{
@@ -971,18 +1196,29 @@ body{
 
         overflow-x:auto;
 
-    }
+        gap:10px;
 
-    .info-layout{
-
-        grid-template-columns:1fr;
+        scrollbar-width:none;
 
     }
 
-    .files-grid,
-    .siaran-grid{
+    .nav::-webkit-scrollbar{
 
-        grid-template-columns:1fr;
+        display:none;
+
+    }
+
+    .nav-button{
+
+        white-space:nowrap;
+
+        flex-shrink:0;
+
+    }
+
+    .main{
+
+        padding:24px 18px;
 
     }
 
@@ -990,17 +1226,55 @@ body{
 
 @media(max-width:768px){
 
-    .main{
-
-        padding:18px;
-
-    }
-
     .content-header{
 
         flex-direction:column;
 
         text-align:center;
+
+        align-items:center;
+
+    }
+
+    .logo-container{
+
+        width:64px;
+
+        height:64px;
+
+    }
+
+    .logo-container img{
+
+        width:120%;
+
+        height:120%;
+
+        transform:translate(-10%,-10%);
+
+    }
+
+    .header-title h1{
+
+        font-size:24px;
+
+    }
+
+    .header-title p{
+
+        font-size:14px;
+
+    }
+
+    .search-card{
+
+        padding:24px 20px;
+
+    }
+
+    .search-card h2{
+
+        font-size:24px;
 
     }
 
@@ -1010,12 +1284,195 @@ body{
 
     }
 
-    .result-card{
+    .search-row button{
 
-        flex-direction:column;
-
-        align-items:flex-start;
+        width:100%;
 
     }
+
+    .result-card{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .result-data{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .action{
+
+        width:100%;
+
+        text-align:left;
+
+        min-width:0;
+
+    }
+
+    .siaran-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:600px){
+
+    .flyer-card,
+
+    .info-side-card,
+
+    .desc-card,
+
+    .file-card,
+
+    .search-card,
+
+    .hotline-card{
+
+        padding:18px;
+
+    }
+
+    .info-side-card h2{
+
+        font-size:24px;
+
+    }
+
+    .desc-card h3{
+
+        font-size:22px;
+
+    }
+
+    .info-value{
+
+        font-size:18px;
+
+    }
+
+    .btn-file,
+
+    .btn-wa,
+
+    .btn-download,
+
+    .btn-presensi,
+
+    .back-button{
+
+        width:100%;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .main{
+
+        padding:16px;
+
+    }
+
+    .content-header{
+
+        margin-bottom:20px;
+
+    }
+
+    .header-title h1{
+
+        font-size:21px;
+
+        line-height:1.4;
+
+    }
+
+    .header-title p{
+
+        font-size:13px;
+
+    }
+
+    .icon-circle{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:28px;
+
+    }
+
+    .search-card h2{
+
+        font-size:22px;
+
+    }
+
+    .search-card p,
+
+    .description{
+
+        font-size:14px;
+
+    }
+
+    .notice{
+
+        font-size:14px;
+
+    }
+
+}
+
+/* =====================================================
+   ANIMATION
+===================================================== */
+
+button,
+.btn-file,
+.btn-wa,
+.btn-download,
+.btn-presensi,
+.back-button,
+.siaran-card,
+.result-card{
+
+    transition:.25s;
+
+}
+
+button:hover,
+.btn-file:hover,
+.btn-wa:hover,
+.btn-download:hover,
+.btn-presensi:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.result-card:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.flyer-card img{
+
+    transition:.35s;
+
+}
+
+.flyer-card:hover img{
+
+    transform:scale(1.02);
 
 }
