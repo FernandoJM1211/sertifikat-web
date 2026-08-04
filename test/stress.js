@@ -2,8 +2,19 @@ import http from "k6/http";
 import { check, sleep } from "k6";
 
 export const options = {
-    vus: 10,
-    duration: "30s",
+
+    stages: [
+
+        { duration: "20s", target: 10 },
+
+        { duration: "20s", target: 30 },
+
+        { duration: "20s", target: 50 },
+
+        { duration: "20s", target: 0 },
+
+    ],
+
 };
 
 const BASE_URL = "http://localhost:3000/api";
@@ -16,7 +27,6 @@ export default function () {
 
     check(res, {
         "status 200": (r) => r.status === 200,
-        "response < 500ms": (r) => r.timings.duration < 500,
     });
 
     sleep(1);

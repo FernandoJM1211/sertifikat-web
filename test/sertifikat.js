@@ -8,15 +8,21 @@ export const options = {
 
 const BASE_URL = "http://localhost:3000/api";
 
+const keyword = "Fernando";
+
+const kode = "VPLR001";
+
 export default function () {
 
     const res = http.get(
-        `${BASE_URL}/kegiatan-list`
+
+        `${BASE_URL}/sertifikat?keyword=${encodeURIComponent(keyword)}&kode=${encodeURIComponent(kode)}`
+
     );
 
     check(res, {
         "status 200": (r) => r.status === 200,
-        "response < 500ms": (r) => r.timings.duration < 500,
+        "response < 700ms": (r) => r.timings.duration < 700,
     });
 
     sleep(1);

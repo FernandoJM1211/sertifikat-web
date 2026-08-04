@@ -8,10 +8,12 @@ export const options = {
 
 const BASE_URL = "http://localhost:3000/api";
 
+const KODE = "VPL001";
+
 export default function () {
 
     const res = http.get(
-        `${BASE_URL}/kegiatan-list`
+        `${BASE_URL}/kegiatan-detail?kode=${encodeURIComponent(KODE)}`
     );
 
     check(res, {
