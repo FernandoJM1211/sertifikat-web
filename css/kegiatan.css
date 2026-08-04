@@ -93,7 +93,9 @@ body{
 
     height:100vh;
 
-    overflow:hidden;
+    display:flex;
+
+    flex-direction:column;
 
     transition:.25s;
 
@@ -167,7 +169,10 @@ body{
 
     gap:8px;
 
+    flex:1;
+
 }
+
 
 .nav-button{
 
@@ -230,6 +235,19 @@ body{
     border-left:4px solid #0D6EFD;
 
 }
+.nav-back{
+
+    text-decoration:none;
+
+    color:#475569;
+
+}
+
+.nav-back:hover{
+
+    color:#0D6EFD;
+
+}
 
 /* =====================================================
    SIDEBAR COLLAPSE
@@ -269,6 +287,11 @@ body{
 
 }
 
+.sidebar.closed .nav-back span{
+
+    display:none;
+
+}
 /* =====================================================
    HEADER
 ===================================================== */

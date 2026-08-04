@@ -1,15 +1,16 @@
-import http from 'k6/http';
-import { check, sleep } from 'k6';
+import http from "k6/http";
+import { check, sleep } from "k6";
 
 export const options = {
 
     vus: 20,
 
-    duration: '30s',
+    duration: "30s",
 
 };
 
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL =
+"https://sertifikat-web-git-feature-system-v2-fernandojm1211s-projects.vercel.app";
 
 export default function () {
 
@@ -19,7 +20,7 @@ export default function () {
 
     check(res, {
 
-        'status 200': (r) => r.status === 200,
+        "status 200": (r) => r.status === 200,
 
     });
 

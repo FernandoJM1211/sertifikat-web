@@ -6,7 +6,7 @@ export const options = {
     duration: "30s",
 };
 
-const BASE_URL = "http://localhost:3000/api";
+const BASE_URL = "https://sertifikat-web-git-feature-system-v2-fernandojm1211s-projects.vercel.app/pages/home.html";
 
 export default function () {
 
