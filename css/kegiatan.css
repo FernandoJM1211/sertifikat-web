@@ -1670,3 +1670,77 @@ button:hover{
     margin:0;
 
 }
+
+/* ===========================
+   SEARCH LOADING
+=========================== */
+
+.loading-search{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:16px;
+
+    padding:40px 20px;
+
+    text-align:center;
+
+}
+
+.loading-search p{
+
+    color:#64748b;
+
+    font-size:15px;
+
+    margin:0;
+
+}
+
+.spinner{
+
+    width:42px;
+
+    height:42px;
+
+    border:4px solid #dbeafe;
+
+    border-top:4px solid #0b2e6f;
+
+    border-radius:50%;
+
+    animation:spin .8s linear infinite;
+
+}
+
+@keyframes spin{
+
+    to{
+
+        transform:rotate(360deg);
+
+    }
+
+}
+
+/* ===========================
+   DISABLED BUTTON
+=========================== */
+
+.disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed !important;
+
+    pointer-events:none;
+
+    filter:grayscale(100%);
+
+}

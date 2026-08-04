@@ -1,24 +1,112 @@
+/*
+=========================================
+LOAD DAFTAR KEGIATAN
+=========================================
+*/
+
 async function loadKegiatan() {
 
-    const container = document.getElementById("kegiatan-grid");
+    const skeleton =
+        document.getElementById("kegiatan-skeleton");
 
-    showLoading(container);
+    const grid =
+        document.getElementById("kegiatan-grid");
+
+    const empty =
+        document.getElementById("empty-state");
+
+    /*
+    =========================
+    RESET STATE
+    =========================
+    */
+
+    skeleton.classList.remove("fade-out");
+    grid.classList.remove("fade-in");
+    empty.classList.remove("fade-in");
+
+    skeleton.style.display = "grid";
+    grid.style.display = "none";
+    empty.style.display = "none";
+
+    grid.innerHTML = "";
+    skeleton.innerHTML = "";
+
+    /*
+    =========================
+    SKELETON
+    =========================
+    */
+
+    const skeletonCount =
+        window.innerWidth <= 768 ? 2 : 3;
+
+    for (let i = 0; i < skeletonCount; i++) {
+
+        skeleton.insertAdjacentHTML(
+
+            "beforeend",
+
+            `
+
+            <div class="skeleton-card">
+
+                <div class="skeleton-image"></div>
+
+                <div class="skeleton-content">
+
+                    <div class="skeleton-line short"></div>
+
+                    <div class="skeleton-line long"></div>
+
+                    <div class="skeleton-line medium"></div>
+
+                </div>
+
+            </div>
+
+            `
+
+        );
+
+    }
+
+    /*
+    =========================
+    FETCH API
+    =========================
+    */
 
     try {
 
-        const response = await fetch("/api/kegiatan-list");
+        const response =
+            await fetch("/api/kegiatan-list");
 
-        const result = await response.json();
+        const result =
+            await response.json();
 
-        if (!result.success) {
+        skeleton.classList.add("fade-out");
 
-            showError(container, result.message);
+        setTimeout(() => {
 
-            return;
+            skeleton.style.display = "none";
 
-        }
+            if (!result.success) {
 
-        renderKegiatan(container, result.data);
+                grid.style.display = "block";
+
+                showError(
+                    grid,
+                    result.message
+                );
+
+                return;
+
+            }
+
+            renderKegiatan(result.data);
+
+        }, 200);
 
     }
 
@@ -26,64 +114,110 @@ async function loadKegiatan() {
 
         console.error(err);
 
-        showError(
-            container,
-            "Gagal mengambil data kegiatan."
-        );
+        skeleton.classList.add("fade-out");
+
+        setTimeout(() => {
+
+            skeleton.style.display = "none";
+
+            grid.style.display = "block";
+
+            showError(
+                grid,
+                "Gagal mengambil data kegiatan."
+            );
+
+        }, 200);
 
     }
 
 }
 
-function renderKegiatan(container, kegiatan) {
+/*
+=========================================
+RENDER KEGIATAN
+=========================================
+*/
 
-    console.log("DATA KEGIATAN:", kegiatan);
+function renderKegiatan(kegiatan) {
 
-    container.innerHTML = "";
+    const grid =
+        document.getElementById("kegiatan-grid");
+
+    const empty =
+        document.getElementById("empty-state");
+
+    grid.innerHTML = "";
+
+    empty.style.display = "none";
+
+    grid.classList.remove("fade-in");
+    empty.classList.remove("fade-in");
+
+    /*
+    =========================
+    EMPTY
+    =========================
+    */
 
     if (!kegiatan.length) {
 
-        container.innerHTML = `
-            <div class="empty-state">
-                Belum ada kegiatan.
-            </div>
-        `;
+        empty.style.display = "block";
+
+        empty.classList.add("fade-in");
 
         return;
 
     }
 
+    /*
+    =========================
+    GRID
+    =========================
+    */
+
+    grid.style.display = "grid";
+
+    grid.classList.add("fade-in");
+
     kegiatan.forEach(item => {
 
-        console.log(item);
+        grid.insertAdjacentHTML(
 
-        container.insertAdjacentHTML(
             "beforeend",
+
             createCard(item)
+
         );
 
     });
 
 }
 
+/*
+=========================================
+MEMBUAT CARD KEGIATAN
+=========================================
+*/
+
 function createCard(item) {
 
-    console.log(item.flyer);
-console.log(convertDriveImage(item.flyer));
+    const flyer =
+        convertDriveImage(item.flyer);
 
     return `
 
         <div
-            class="kegiatan-card"
+            class="kegiatan-card fade-in"
             onclick="bukaKegiatan('${item.kode}')">
 
             <div class="card-image">
 
                 <img
-    src="${convertDriveImage(item.flyer)}"
-    alt="${item.nama}"
-    onload="console.log('BERHASIL:', this.src)"
-    onerror="console.log('GAGAL:', this.src)">
+                    src="${flyer}"
+                    alt="${item.nama}"
+                    loading="lazy"
+                    decoding="async">
 
             </div>
 
@@ -109,74 +243,73 @@ console.log(convertDriveImage(item.flyer));
 
 }
 
-function bukaKegiatan(kode){
+/*
+=========================================
+BUKA HALAMAN KEGIATAN
+=========================================
+*/
+
+function bukaKegiatan(kode) {
 
     window.location.href =
-        "kegiatan.html?kode=" + kode;
+        `kegiatan.html?kode=${encodeURIComponent(kode)}`;
 
 }
 
-function convertDriveImage(url){
+/*
+=========================================
+KONVERSI LINK GOOGLE DRIVE
+=========================================
+*/
 
-    if(!url){
+function convertDriveImage(url) {
+
+    if (!url) {
 
         return "";
 
     }
 
-    const text = url.toString().trim();
+    const text =
+        String(url).trim();
 
-    /*
-    https://drive.google.com/file/d/FILE_ID/view
-    */
+    const match1 =
+        text.match(/\/d\/([^/]+)/);
 
-    const match1 = text.match(/\/d\/([^/]+)/);
-
-    /*
-    https://drive.google.com/open?id=FILE_ID
-    */
-
-    const match2 = text.match(/[?&]id=([^&]+)/);
+    const match2 =
+        text.match(/[?&]id=([^&]+)/);
 
     let id = "";
 
-    if(match1 && match1[1]){
+    if (match1) {
 
         id = match1[1];
 
     }
 
-    else if(match2 && match2[1]){
+    else if (match2) {
 
         id = match2[1];
 
     }
 
-    if(id){
+    if (!id) {
 
-        return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
+        return text;
 
     }
 
-    return text;
+    return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
 
 }
 
-function showLoading(container){
+/*
+=========================================
+ERROR
+=========================================
+*/
 
-    container.innerHTML = `
-
-        <div class="loading">
-
-            Memuat daftar kegiatan...
-
-        </div>
-
-    `;
-
-}
-
-function showError(container,message){
+function showError(container, message) {
 
     container.innerHTML = `
 
@@ -190,4 +323,16 @@ function showError(container,message){
 
 }
 
-loadKegiatan();
+/*
+=========================================
+INIT
+=========================================
+*/
+
+document.addEventListener(
+
+    "DOMContentLoaded",
+
+    loadKegiatan
+
+);

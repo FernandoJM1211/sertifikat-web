@@ -19,18 +19,14 @@ async function loadKegiatan() {
     cache.kegiatan &&
     Date.now() - cache.kegiatanTime < CACHE_DURATION
   ) {
-    console.log("✅ Daftar kegiatan dari CACHE");
     return cache.kegiatan;
   }
 
   if (cache.kegiatanLoading) {
-    console.log("⏳ Menunggu cache kegiatan...");
     return cache.kegiatanLoading;
   }
 
   cache.kegiatanLoading = (async () => {
-
-    console.log("📄 Mengambil daftar kegiatan...");
 
     const sheets = await getSheetsService();
 
@@ -73,8 +69,6 @@ async function loadKegiatan() {
     cache.kegiatan = data;
     cache.kegiatanTime = Date.now();
 
-    console.log(`📦 ${data.length} kegiatan berhasil dimuat`);
-
     return data;
 
   })();
@@ -101,15 +95,21 @@ async function getDaftarKegiatan() {
 
   const data = await loadKegiatan();
 
-  return data.map(item => ({
+  return data
+    .filter(item =>
+      String(item.status)
+        .trim()
+        .toLowerCase() === "aktif"
+    )
+    .map(item => ({
 
-    kode: item.kode,
-    nama: item.nama,
-    flyer: item.flyer,
-    tanggal: item.tanggal,
-    status: item.status
+      kode: item.kode,
+      nama: item.nama,
+      flyer: item.flyer,
+      tanggal: item.tanggal,
+      status: item.status
 
-  }));
+    }));
 
 }
 

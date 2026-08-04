@@ -76,7 +76,7 @@ LOAD HALAMAN
 =====================================================
 */
 
-window.onload = async function () {
+document.addEventListener("DOMContentLoaded", async () => {
 
     try {
 
@@ -131,7 +131,7 @@ window.onload = async function () {
 
 }
 
-};
+});
 
 /*
 =====================================================
@@ -147,8 +147,17 @@ function setKegiatan(data) {
     document.getElementById("info-nama").innerText =
         data.nama || "-";
 
-    document.getElementById("info-flyer").src =
-        ubahKeThumbnail(data.flyer);
+    const flyer =
+    document.getElementById("info-flyer");
+
+flyer.src =
+    ubahKeThumbnail(data.flyer);
+
+flyer.onerror = () => {
+
+    flyer.src = "../images/logo-lan.png";
+
+};
 
     document.getElementById("info-tanggal").innerText =
         data.tanggal || "-";
@@ -165,13 +174,24 @@ function setKegiatan(data) {
     ============================
     */
 
-    document.getElementById("btn-vb").href =
-        data.virtualBackground || "#";
+    setLink(
+    "btn-vb",
+    data.virtualBackground
+);
 
-    document.getElementById("vb-preview").src =
-        ubahKeThumbnail(
-            data.virtualBackground
-        );
+    const vb =
+    document.getElementById("vb-preview");
+
+vb.src =
+    ubahKeThumbnail(
+        data.virtualBackground
+    );
+
+vb.onerror = () => {
+
+    vb.src = "../images/logo-lan.png";
+
+};
 
     /*
     ============================
@@ -179,8 +199,10 @@ function setKegiatan(data) {
     ============================
     */
 
-    document.getElementById("link-files").href =
-        data.files || "#";
+    setLink(
+    "link-files",
+    data.files
+);
 
     /*
     ============================
@@ -188,11 +210,15 @@ function setKegiatan(data) {
     ============================
     */
 
-    document.getElementById("link-zoom").href =
-        data.zoom || "#";
+    setLink(
+    "link-zoom",
+    data.zoom
+);
 
-    document.getElementById("link-youtube").href =
-        data.youtube || "#";
+    setLink(
+    "link-youtube",
+    data.youtube
+);
 
     /*
     ============================
@@ -200,8 +226,52 @@ function setKegiatan(data) {
     ============================
     */
 
-    document.getElementById("link-presensi").href =
-        data.presensi || "#";
+    setLink(
+    "link-presensi",
+    data.presensi
+);
+
+}
+
+/*
+=====================================================
+AKTIF / NONAKTIF LINK
+=====================================================
+*/
+
+function setLink(id, url) {
+
+    const element =
+        document.getElementById(id);
+
+    if (!element) {
+
+        return;
+
+    }
+
+    if (url && url.trim() !== "") {
+
+        element.href = url;
+
+        element.classList.remove("disabled");
+
+        element.removeAttribute("aria-disabled");
+
+    }
+
+    else {
+
+        element.removeAttribute("href");
+
+        element.classList.add("disabled");
+
+        element.setAttribute(
+            "aria-disabled",
+            "true"
+        );
+
+    }
 
 }
 
@@ -252,7 +322,7 @@ function ubahKeThumbnail(link) {
 
     if (id) {
 
-        return `https://drive.google.com/thumbnail?id=${id}&sz=w2000`;
+        return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
 
     }
 
@@ -292,21 +362,29 @@ async function cari() {
 
     document.getElementById("hasil").innerHTML = `
 
-        <div class="empty-state">
+<div class="loading-search">
 
-            Mencari data...
+    <div class="spinner"></div>
 
-        </div>
+    <p>
 
-    `;
+        Sedang mencari sertifikat...
+
+    </p>
+
+</div>
+
+`;
 
     try {
 
-        const data =
-    await cariSertifikat(
-        keyword,
-        dataKegiatan.kode
-    );
+        const data = await cariSertifikat(
+
+    keyword,
+
+    dataKegiatan.kode
+
+);
 
 tampilkan(data);
 
@@ -531,7 +609,3 @@ function tampilkan(data) {
 FINISH
 =====================================================
 */
-
-console.log(
-    "✅ kegiatan.js loaded"
-);

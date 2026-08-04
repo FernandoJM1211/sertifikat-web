@@ -3,19 +3,24 @@
 =========================== */
 
 *{
+
     margin:0;
     padding:0;
     box-sizing:border-box;
+
 }
 
 :root{
 
     --primary:#0b2e6f;
     --primary-light:#EAF2FF;
+
     --background:#F5F8FD;
+
     --text:#1f2937;
     --text-light:#526277;
-    --white:#FFFFFF;
+
+    --white:#ffffff;
 
     --radius:24px;
 
@@ -24,22 +29,31 @@
 
 }
 
+/* ===========================
+   BODY
+=========================== */
+
 body{
 
     font-family:Arial,sans-serif;
 
+    color:var(--text);
+
     background:
+
         linear-gradient(
+
             180deg,
+
             #eef6ff 0%,
+
             #ffffff 45%,
+
             #f8fbff 100%
+
         );
 
-    color:#1f2937;
-
 }
-
 
 /* ===========================
    HEADER
@@ -47,17 +61,23 @@ body{
 
 .page-header{
 
-    background:
-        linear-gradient(
-            180deg,
-            #eef6ff 0%,
-            #f8fbff 100%
-        );
-
     padding:
+
         28px
         40px
         36px;
+
+    background:
+
+        linear-gradient(
+
+            180deg,
+
+            #eef6ff 0%,
+
+            #f8fbff 100%
+
+        );
 
 }
 
@@ -81,9 +101,7 @@ body{
 
     height:90px;
 
-    background:white;
-
-    border-radius:20px;
+    flex-shrink:0;
 
     display:flex;
 
@@ -91,9 +109,11 @@ body{
 
     align-items:center;
 
-    box-shadow:var(--shadow);
+    background:var(--white);
 
-    flex-shrink:0;
+    border-radius:20px;
+
+    box-shadow:var(--shadow);
 
 }
 
@@ -107,23 +127,23 @@ body{
 
 .header-title h1{
 
-    color:#0b2e6f;
+    color:var(--primary);
 
     font-size:34px;
 
-    line-height:1.25;
-
     font-weight:700;
+
+    line-height:1.25;
 
 }
 
 .header-title p{
 
-    color:#526277;
+    margin-top:6px;
+
+    color:var(--text-light);
 
     font-size:17px;
-
-    margin-top:6px;
 
 }
 
@@ -135,33 +155,36 @@ body{
 
     max-width:1200px;
 
-    margin:24px auto 0;
+    margin:
 
-    background:white;
-
-    border-radius:24px;
+        24px auto 0;
 
     padding:
-        30px
+
+        32px
         42px;
 
-    text-align:center;
+    background:var(--white);
+
+    border-radius:var(--radius);
+
+    border:1px solid #e5eefb;
 
     box-shadow:var(--shadow);
 
-    border:1px solid #e5eefb;
+    text-align:center;
 
 }
 
 .hero h2{
 
-    color:#0b2e6f;
+    color:var(--primary);
 
     font-size:30px;
 
     font-weight:700;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
 
 }
 
@@ -171,16 +194,16 @@ body{
 
     margin:auto;
 
-    color:#526277;
+    color:var(--text-light);
 
     font-size:16px;
 
-    line-height:1.7;
+    line-height:1.8;
 
 }
 
 /* ===========================
-   CONTENT
+   CONTAINER
 =========================== */
 
 .container{
@@ -190,6 +213,7 @@ body{
     margin:auto;
 
     padding:
+
         30px
         30px
         60px;
@@ -204,7 +228,7 @@ body{
 
 .section-header h2{
 
-    color:#0b2e6f;
+    color:var(--primary);
 
     font-size:30px;
 
@@ -216,14 +240,23 @@ body{
 
     margin-top:8px;
 
-    color:#526277;
+    color:var(--text-light);
 
     font-size:16px;
 
-    line-height:1.6;
+    line-height:1.7;
 
 }
 
+/* ===========================
+   KEGIATAN
+=========================== */
+
+.kegiatan-container{
+
+    min-height:320px;
+
+}
 
 /* ===========================
    GRID
@@ -238,8 +271,9 @@ body{
 
     gap:24px;
 
-}
+    align-items:start;
 
+}
 
 /* ===========================
    CARD
@@ -247,7 +281,7 @@ body{
 
 .kegiatan-card{
 
-    background:white;
+    background:var(--white);
 
     border-radius:22px;
 
@@ -255,22 +289,24 @@ body{
 
     cursor:pointer;
 
-    transition:.25s;
-
     border:1px solid #e5eefb;
 
-    box-shadow:0 10px 28px rgba(15,23,42,.08);
+    box-shadow:var(--shadow);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 
 }
 
 .kegiatan-card:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-6px);
 
-    box-shadow:0 18px 36px rgba(15,23,42,.12);
+    box-shadow:
+        0 22px 45px rgba(15,23,42,.14);
 
 }
-
 
 /* ===========================
    IMAGE
@@ -278,9 +314,11 @@ body{
 
 .card-image{
 
+    background:#eef6ff;
+
     overflow:hidden;
 
-    background:#eef6ff;
+    aspect-ratio:4/5;
 
 }
 
@@ -288,22 +326,23 @@ body{
 
     width:100%;
 
-    height:290px;
-
-    object-fit:cover;
+    height:100%;
 
     display:block;
 
-    transition:.35s;
+    object-fit:cover;
+
+    transition:
+        transform .35s ease,
+        opacity .25s ease;
 
 }
 
 .kegiatan-card:hover .card-image img{
 
-    transform:scale(1.03);
+    transform:scale(1.04);
 
 }
-
 
 /* ===========================
    CONTENT
@@ -320,32 +359,330 @@ body{
 
 .card-date{
 
-    color:#64748b;
-
-    font-size:14px;
-
-    margin-bottom:10px;
-
     display:flex;
 
     align-items:center;
 
     gap:6px;
 
+    color:#64748b;
+
+    font-size:14px;
+
+    margin-bottom:10px;
+
 }
 
 .card-content h3{
 
-    color:#0b2e6f;
+    color:var(--primary);
 
     font-size:17px;
 
-    line-height:1.45;
-
     font-weight:700;
 
-    margin:0;
+    line-height:1.5;
 
     text-align:center;
+
+}
+
+/* ===========================
+   SKELETON
+=========================== */
+
+.skeleton-card{
+
+    background:var(--white);
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    border:1px solid #e5eefb;
+
+    box-shadow:var(--shadow);
+
+}
+
+.skeleton-image,
+.skeleton-line{
+
+    background:
+
+        linear-gradient(
+            90deg,
+            #ECEFF3 25%,
+            #F8FAFC 50%,
+            #ECEFF3 75%
+        );
+
+    background-size:300% 100%;
+
+    animation:
+        shimmer 1.3s linear infinite;
+
+}
+
+.skeleton-image{
+
+    width:100%;
+
+    aspect-ratio:4/5;
+
+}
+
+.skeleton-content{
+
+    padding:20px;
+
+}
+
+.skeleton-line{
+
+    height:16px;
+
+    border-radius:8px;
+
+    margin-bottom:14px;
+
+}
+
+.skeleton-line.short{
+
+    width:40%;
+
+}
+
+.skeleton-line.medium{
+
+    width:70%;
+
+}
+
+.skeleton-line.long{
+
+    width:100%;
+
+}
+
+/* ===========================
+   SHIMMER
+=========================== */
+
+@keyframes shimmer{
+
+    from{
+
+        background-position:100% 0;
+
+    }
+
+    to{
+
+        background-position:-100% 0;
+
+    }
+
+}
+
+/* ===========================
+   ANIMATION
+=========================== */
+
+.fade-in{
+
+    animation:
+        fadeIn .35s ease forwards;
+
+}
+
+.fade-out{
+
+    animation:
+        fadeOut .2s ease forwards;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(10px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@keyframes fadeOut{
+
+    from{
+
+        opacity:1;
+
+    }
+
+    to{
+
+        opacity:0;
+
+    }
+
+}
+
+/* ===========================
+   EMPTY STATE
+=========================== */
+
+.empty-state{
+
+    background:var(--white);
+
+    border-radius:22px;
+
+    border:1px solid #e5eefb;
+
+    box-shadow:var(--shadow);
+
+    padding:70px 30px;
+
+    text-align:center;
+
+}
+
+.empty-icon{
+
+    font-size:60px;
+
+    margin-bottom:18px;
+
+}
+
+.empty-state h3{
+
+    color:var(--primary);
+
+    font-size:28px;
+
+    margin-bottom:14px;
+
+}
+
+.empty-state p{
+
+    color:var(--text-light);
+
+    line-height:1.8;
+
+}
+
+/* ===========================
+   ERROR
+=========================== */
+
+.error{
+
+    background:#fff4f4;
+
+    color:#842029;
+
+    border:1px solid #f5c2c7;
+
+    border-radius:18px;
+
+    padding:24px;
+
+    text-align:center;
+
+}
+
+/* ===========================
+   RESPONSIVE
+=========================== */
+
+@media(max-width:768px){
+
+.page-header{
+
+    padding:20px;
+
+}
+
+.header-content{
+
+    flex-direction:column;
+
+    text-align:center;
+
+}
+
+.header-logo{
+
+    width:80px;
+
+    height:80px;
+
+}
+
+.header-logo img{
+
+    width:95px;
+
+}
+
+.header-title h1{
+
+    font-size:26px;
+
+}
+
+.hero{
+
+    padding:24px;
+
+}
+
+.hero h2{
+
+    font-size:24px;
+
+}
+
+.container{
+
+    padding:
+        24px
+        18px
+        50px;
+
+}
+
+.section-header h2{
+
+    font-size:26px;
+
+}
+
+.kegiatan-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.empty-state{
+
+    padding:50px 20px;
+
+}
 
 }
