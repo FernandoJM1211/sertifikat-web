@@ -196,6 +196,64 @@ function renderKegiatan(kegiatan) {
 
 /*
 =========================================
+STATUS KEGIATAN
+=========================================
+*/
+
+function getStatusKegiatan(tanggal) {
+
+    if (!tanggal) {
+
+        return {
+
+            text: "-",
+            className: "status-finished"
+
+        };
+
+    }
+
+    const eventDate = new Date(tanggal);
+
+    const today = new Date();
+
+    eventDate.setHours(0, 0, 0, 0);
+
+    today.setHours(0, 0, 0, 0);
+
+    if (eventDate.getTime() === today.getTime()) {
+
+        return {
+
+            text: "Hari ini",
+            className: "status-today"
+
+        };
+
+    }
+
+    if (eventDate > today) {
+
+        return {
+
+            text: "Akan Datang",
+            className: "status-coming"
+
+        };
+
+    }
+
+    return {
+
+        text: "Selesai",
+        className: "status-finished"
+
+    };
+
+}
+
+/*
+=========================================
 MEMBUAT CARD KEGIATAN
 =========================================
 */
@@ -205,11 +263,14 @@ function createCard(item) {
     const flyer =
         convertDriveImage(item.flyer);
 
+    const status =
+        getStatusKegiatan(item.tanggal);
+
     return `
 
-        <div
-            class="kegiatan-card fade-in"
-            onclick="bukaKegiatan('${item.kode}')">
+        <a
+            href="pages/kegiatan.html?kode=${encodeURIComponent(item.kode)}"
+            class="kegiatan-card fade-in">
 
             <div class="card-image">
 
@@ -217,15 +278,26 @@ function createCard(item) {
                     src="${flyer}"
                     alt="${item.nama}"
                     loading="lazy"
-                    decoding="async">
+                    decoding="async"
+                    draggable="false">
 
             </div>
 
             <div class="card-content">
 
-                <div class="card-date">
+                <div class="card-meta">
 
-                    📅 ${item.tanggal}
+                    <div class="card-date">
+
+                        📅 ${item.tanggal}
+
+                    </div>
+
+                    <div class="card-status ${status.className}">
+
+                        ${status.text}
+
+                    </div>
 
                 </div>
 
@@ -237,24 +309,12 @@ function createCard(item) {
 
             </div>
 
-        </div>
+        </a>
 
     `;
 
 }
 
-/*
-=========================================
-BUKA HALAMAN KEGIATAN
-=========================================
-*/
-
-function bukaKegiatan(kode) {
-
-    window.location.href =
-        `kegiatan.html?kode=${encodeURIComponent(kode)}`;
-
-}
 
 /*
 =========================================

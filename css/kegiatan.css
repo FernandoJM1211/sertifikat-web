@@ -870,6 +870,56 @@ button:hover{
 
 }
 
+.info-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:8px;
+
+}
+
+.status-badge{
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+.status-coming{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status-today{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.status-finished{
+
+    background:#F1F5F9;
+
+    color:#64748B;
+
+}
+
 .info-item:last-child{
 
     margin-bottom:0;
@@ -1338,21 +1388,23 @@ button:hover{
 
     .nav-button{
 
-        min-width:170px;
+    min-width:170px;
 
-        justify-content:center;
+    justify-content:center;
 
-        border-left:none !important;
-
-    }
+}
 
     .nav-button.active{
 
-        border-left:none;
+    background:#E8F1FF;
 
-        border-bottom:3px solid var(--primary);
+    color:#0D6EFD;
 
-    }
+    border-left:4px solid #0D6EFD;
+
+    border-bottom:none;
+
+}
 
     .main{
         padding:22px 18px;

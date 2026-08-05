@@ -1,15 +1,181 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=pages/home.html">
-    <title>Redirect...</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>
+
+        Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
+
+    </title>
+
+    <link
+        rel="icon"
+        href="images/logo-lan.png">
+
+    <link
+        rel="stylesheet"
+        href="css/home.css">
+
 </head>
+
 <body>
 
-<script>
-    window.location.replace("pages/home.html");
-</script>
+<!-- =========================================
+HEADER
+========================================= -->
+
+<header class="page-header">
+
+    <div class="header-overlay">
+
+        <div class="header-content">
+
+            <div class="header-logo">
+
+                <img
+                    src="images/logo-lan.png"
+                    alt="Logo LAN">
+
+            </div>
+
+            <div class="header-title">
+
+                <h1>
+
+                    Direktorat Teknologi dan Digitalisasi Pembelajaran
+
+                </h1>
+
+                <p>
+
+                    Lembaga Administrasi Negara
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <section class="hero">
+
+            <h2>
+
+                Portal Kegiatan
+
+            </h2>
+
+            <p>
+
+                Temukan seluruh kegiatan yang diselenggarakan oleh
+                Direktorat Teknologi dan Digitalisasi Pembelajaran.
+                Mulai dari informasi kegiatan, presensi,
+                live streaming, file pendukung,
+                hingga pencarian sertifikat.
+
+            </p>
+
+        </section>
+
+    </div>
+
+</header>
+
+<!-- =========================================
+MAIN
+========================================= -->
+
+<main class="container">
+
+    <section class="section-header">
+
+        <h2>
+
+            Daftar Kegiatan
+
+        </h2>
+
+        <p>
+
+            Pilih salah satu kegiatan di bawah ini.
+
+        </p>
+
+    </section>
+
+    <!-- =====================================
+    DAFTAR KEGIATAN
+    ====================================== -->
+
+    <section
+        id="kegiatan-container"
+        class="kegiatan-container">
+
+        <!-- Skeleton -->
+
+        <div
+            id="kegiatan-skeleton"
+            class="kegiatan-grid">
+
+        </div>
+
+        <!-- Grid -->
+
+        <div
+            id="kegiatan-grid"
+            class="kegiatan-grid"
+            style="display:none;">
+
+        </div>
+
+        <!-- Empty State -->
+
+        <div
+            id="empty-state"
+            class="empty-state"
+            style="display:none;">
+
+            <div class="empty-icon">
+
+                📅
+
+            </div>
+
+            <h3>
+
+                Belum Ada Kegiatan Aktif
+
+            </h3>
+
+            <p>
+
+                Saat ini belum terdapat kegiatan yang sedang dibuka.
+                Silakan kunjungi kembali beberapa waktu lagi.
+
+            </p>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- =========================================
+SCRIPT
+========================================= -->
+
+<script src="js/config.js"></script>
+
+<script src="js/api.js"></script>
+
+<script src="js/home.js"></script>
 
 </body>
+
 </html>

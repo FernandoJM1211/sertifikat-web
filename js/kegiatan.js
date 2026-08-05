@@ -162,6 +162,19 @@ flyer.onerror = () => {
     document.getElementById("info-tanggal").innerText =
         data.tanggal || "-";
 
+
+    const status =
+    getStatusKegiatan(data.tanggal);
+
+const badge =
+    document.getElementById("info-status");
+
+badge.innerText =
+    status.text;
+
+badge.className =
+    `status-badge ${status.className}`;
+
     document.getElementById("info-waktu").innerText =
         data.waktu || "-";
 
@@ -230,6 +243,63 @@ vb.onerror = () => {
     "link-presensi",
     data.presensi
 );
+
+}
+
+function getStatusKegiatan(tanggal) {
+
+    if (!tanggal) {
+
+        return {
+
+            text: "-",
+            className: "status-finished"
+
+        };
+
+    }
+
+    const eventDate =
+        new Date(tanggal);
+
+    const today =
+        new Date();
+
+    eventDate.setHours(0,0,0,0);
+
+    today.setHours(0,0,0,0);
+
+    if(eventDate.getTime() === today.getTime()){
+
+        return{
+
+            text:"Hari ini",
+
+            className:"status-today"
+
+        };
+
+    }
+
+    if(eventDate > today){
+
+        return{
+
+            text:"Akan Datang",
+
+            className:"status-coming"
+
+        };
+
+    }
+
+    return{
+
+        text:"Selesai",
+
+        className:"status-finished"
+
+    };
 
 }
 

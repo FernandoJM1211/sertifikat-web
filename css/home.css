@@ -267,7 +267,7 @@ body{
     display:grid;
 
     grid-template-columns:
-        repeat(auto-fit,minmax(320px,1fr));
+        repeat(3,1fr);
 
     gap:24px;
 
@@ -291,20 +291,27 @@ body{
 
     border:1px solid #e5eefb;
 
-    box-shadow:var(--shadow);
+    box-shadow:
+        0 8px 22px rgba(15,23,42,.08);
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
+        transform .28s ease,
+        box-shadow .28s ease;
+
+    text-decoration:none;
+
+    color:inherit;
 
 }
 
 .kegiatan-card:hover{
 
-    transform:translateY(-6px);
+    transform:
+        translateY(-8px)
+        scale(1.01);
 
     box-shadow:
-        0 22px 45px rgba(15,23,42,.14);
+        0 22px 48px rgba(15,23,42,.18);
 
 }
 
@@ -336,6 +343,8 @@ body{
         transform .35s ease,
         opacity .25s ease;
 
+    pointer-events:none;
+
 }
 
 .kegiatan-card:hover .card-image img{
@@ -357,6 +366,20 @@ body{
 
 }
 
+.card-meta{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:14px;
+
+}
+
 .card-date{
 
     display:flex;
@@ -370,6 +393,44 @@ body{
     font-size:14px;
 
     margin-bottom:10px;
+
+}
+
+.card-status{
+
+    padding:5px 12px;
+
+    border-radius:999px;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+}
+
+.status-coming{
+
+    background:#DCFCE7;
+
+    color:#15803D;
+
+}
+
+.status-today{
+
+    background:#DBEAFE;
+
+    color:#1D4ED8;
+
+}
+
+.status-finished{
+
+    background:#F1F5F9;
+
+    color:#64748B;
 
 }
 
@@ -610,6 +671,21 @@ body{
    RESPONSIVE
 =========================== */
 
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.kegiatan-grid{
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+}
+
+}
+
 @media(max-width:768px){
 
 .page-header{
@@ -684,5 +760,6 @@ body{
     padding:50px 20px;
 
 }
+
 
 }

@@ -101,6 +101,9 @@ async function getDaftarKegiatan() {
         .trim()
         .toLowerCase() === "aktif"
     )
+
+      .reverse()
+      
     .map(item => ({
 
       kode: item.kode,
