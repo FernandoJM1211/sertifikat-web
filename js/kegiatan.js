@@ -158,7 +158,33 @@ function setKegiatan(data) {
     ============================
     */
 
+  /*
+============================
+PRESENSI
+============================
+*/
+
   setLink("link-presensi", data.presensi);
+
+  const btnPresensi = document.getElementById("link-presensi");
+
+  const infoPresensi = document.getElementById("presensi-info");
+
+  if (data.presensi && data.presensi.trim() !== "") {
+    btnPresensi.innerText = "Isi Presensi";
+
+    btnPresensi.classList.remove("btn-presensi-disabled");
+
+    infoPresensi.innerText =
+      "Silakan mengisi daftar hadir kegiatan melalui tautan presensi berikut.";
+  } else {
+    btnPresensi.innerText = "Presensi Ditutup";
+
+    btnPresensi.classList.add("btn-presensi-disabled");
+
+    infoPresensi.innerText =
+      "Tautan presensi belum tersedia atau telah ditutup oleh panitia.";
+  }
 }
 
 function getStatusKegiatan(tanggal) {

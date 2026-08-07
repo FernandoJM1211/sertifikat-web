@@ -1,726 +1,414 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
+  <head>
+    <meta charset="UTF-8" />
 
-<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<meta charset="UTF-8">
+    <title>
+      Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
+    </title>
 
-<meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../images/logo-lan.png" />
 
-<title>
+    <link rel="stylesheet" href="../css/kegiatan.css" />
+  </head>
 
-Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
-
-</title>
-
-<link
-    rel="icon"
-    type="image/png"
-    href="../images/logo-lan.png">
-
-<link
-    rel="stylesheet"
-    href="../css/kegiatan.css">
-
-</head>
-
-<body>
-
-<div class="app">
-
-<!-- ===========================
+  <body>
+    <div class="app">
+      <!-- ===========================
      SIDEBAR
 =========================== -->
 
-<aside
-    class="sidebar"
-    id="sidebar">
+      <aside class="sidebar" id="sidebar">
+        <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
 
-<button
-    class="toggle-sidebar"
-    onclick="toggleSidebar()">
+        <div class="nav">
+          <button
+            class="nav-button active"
+            id="btn-info"
+            onclick="bukaTab('info')"
+          >
+            ℹ️
+            <span>Informasi Kegiatan</span>
+          </button>
 
-☰
+          <button
+            class="nav-button"
+            id="btn-sertifikat"
+            onclick="bukaTab('sertifikat')"
+          >
+            📄
+            <span>Sertifikat</span>
+          </button>
 
-</button>
+          <button
+            class="nav-button"
+            id="btn-presensi"
+            onclick="bukaTab('presensi')"
+          >
+            📝
+            <span>Presensi</span>
+          </button>
 
-<div class="nav">
+          <button
+            class="nav-button"
+            id="btn-siaran"
+            onclick="bukaTab('siaran')"
+          >
+            📡
+            <span>Akses Streaming</span>
+          </button>
 
-    <button
-        class="nav-button active"
-        id="btn-info"
-        onclick="bukaTab('info')">
+          <button class="nav-button" id="btn-files" onclick="bukaTab('files')">
+            📁
+            <span>Files</span>
+          </button>
 
-        ℹ️
-        <span>Informasi Kegiatan</span>
+          <div class="nav-spacer"></div>
 
-    </button>
+          <a href="/" class="nav-button nav-back">
+            ⬅️
 
-    <button
-        class="nav-button"
-        id="btn-sertifikat"
-        onclick="bukaTab('sertifikat')">
+            <span>Kembali</span>
+          </a>
+        </div>
+      </aside>
 
-        📄
-        <span>Sertifikat</span>
-
-    </button>
-
-    <button
-        class="nav-button"
-        id="btn-presensi"
-        onclick="bukaTab('presensi')">
-
-        📝
-        <span>Presensi</span>
-
-    </button>
-
-    <button
-        class="nav-button"
-        id="btn-siaran"
-        onclick="bukaTab('siaran')">
-
-        📡
-        <span>Akses Streaming</span>
-
-    </button>
-
-    <button
-        class="nav-button"
-        id="btn-files"
-        onclick="bukaTab('files')">
-
-        📁
-        <span>Files</span>
-
-    </button>
-
-    <div class="nav-spacer"></div>
-
-    <a
-    href="/"
-    class="nav-button nav-back">
-
-    ⬅️
-
-    <span>Kembali</span>
-
-</a>
-</div>
-
-
-</aside>
-
-<!-- ===========================
+      <!-- ===========================
      MAIN
 =========================== -->
 
-<main class="main">
+      <main class="main">
+        <div class="content-header">
+          <div class="logo-container">
+            <img
+              src="../images/logo-lan.png"
+              alt="Logo LAN"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
 
-<div class="content-header">
+          <div class="header-title">
+            <h1>Direktorat Teknologi dan Digitalisasi Pembelajaran</h1>
 
-<div class="logo-container">
+            <p>Lembaga Administrasi Negara</p>
+          </div>
+        </div>
 
-<img
-    src="../images/logo-lan.png"
-    alt="Logo LAN"
-    loading="lazy"
-    decoding="async">
-    
-
-</div>
-
-<div class="header-title">
-
-<h1>
-
-Direktorat Teknologi dan Digitalisasi Pembelajaran
-
-</h1>
-
-<p>
-
-Lembaga Administrasi Negara
-
-</p>
-
-</div>
-
-</div>
-
-<div class="page">
-
-<!-- ===================================================
+        <div class="page">
+          <!-- ===================================================
      TAB INFORMASI
 =================================================== -->
 
-<section
-    id="tab-info"
-    class="tab-content active">
+          <section id="tab-info" class="tab-content active">
+            <div class="info-layout">
+              <!-- Flyer -->
 
-<div class="info-layout">
+              <div class="flyer-card">
+                <img
+                  id="info-flyer"
+                  src=""
+                  alt="Flyer Kegiatan"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
 
-<!-- Flyer -->
+              <!-- Kolom Kanan -->
 
-<div class="flyer-card">
+              <div class="info-side">
+                <div class="info-side-card">
+                  <h2 id="info-nama">Nama Kegiatan</h2>
 
-<img
-    id="info-flyer"
-    src=""
-    alt="Flyer Kegiatan"
-    loading="lazy"
-    decoding="async">
+                  <div class="info-item">
+                    <div class="info-header">
+                      <div class="info-label">Tanggal</div>
 
-</div>
+                      <div id="info-status" class="status-badge">-</div>
+                    </div>
 
-<!-- Kolom Kanan -->
+                    <div class="info-value" id="info-tanggal">-</div>
+                  </div>
 
-<div class="info-side">
+                  <div class="info-item">
+                    <div class="info-label">Waktu</div>
 
-<div class="info-side-card">
+                    <div class="info-value" id="info-waktu">-</div>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-<h2 id="info-nama">
+            <div class="desc-card">
+              <h3>Deskripsi Kegiatan</h3>
 
-Nama Kegiatan
+              <p id="info-deskripsi">-</p>
+            </div>
 
-</h2>
+            <div class="hotline-card">
+              <h3>📞 Butuh Bantuan?</h3>
 
-<div class="info-item">
+              <p>
+                Jika mengalami kendala presensi, akses streaming, file
+                pendukung, maupun sertifikat kegiatan, silakan hubungi Panitia
+                Direktorat Teknologi dan Digitalisasi Pembelajaran.
+              </p>
 
-    <div class="info-header">
+              <a
+                href="https://wa.me/6287782214464"
+                target="_blank"
+                class="btn-wa"
+              >
+                💬 Hubungi via WhatsApp
+              </a>
+            </div>
+          </section>
 
-        <div class="info-label">
-
-            Tanggal
-
-        </div>
-
-        <div
-            id="info-status"
-            class="status-badge">
-
-            -
-
-        </div>
-
-    </div>
-
-    <div
-        class="info-value"
-        id="info-tanggal">
-
-        -
-
-    </div>
-
-</div>
-
-<div class="info-item">
-
-<div class="info-label">
-
-Waktu
-
-</div>
-
-<div
-    class="info-value"
-    id="info-waktu">
-
--
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="desc-card">
-
-<h3>
-
-Deskripsi Kegiatan
-
-</h3>
-
-<p id="info-deskripsi">
-
--
-
-</p>
-
-</div>
-
-<div class="hotline-card">
-
-<h3>
-
-📞 Butuh Bantuan?
-
-</h3>
-
-<p>
-
-Jika mengalami kendala presensi,
-akses streaming,
-file pendukung,
-maupun sertifikat kegiatan,
-silakan hubungi Panitia Direktorat Teknologi dan Digitalisasi Pembelajaran.
-
-</p>
-
-<a
-    href="https://wa.me/6287782214464"
-    target="_blank"
-    class="btn-wa">
-
-💬 Hubungi via WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-<!-- ===================================================
+          <!-- ===================================================
      TAB SERTIFIKAT
 =================================================== -->
 
-<section
-    id="tab-sertifikat"
-    class="tab-content">
+          <section id="tab-sertifikat" class="tab-content">
+            <div class="search-card">
+              <div class="icon-circle">📄</div>
 
-<div class="search-card">
+              <h2>Pencarian Sertifikat Kegiatan</h2>
 
-<div class="icon-circle">
+              <p class="notice">
+                <strong>
+                  SERTIFIKAT TERSEDIA MINIMAL H+14 KERJA SETELAH PELAKSANAAN
+                  WEBINAR.
+                </strong>
+              </p>
 
-📄
+              <p class="description">
+                Masukkan nama peserta untuk mencari sertifikat kegiatan.
+                Pastikan nama sesuai dengan data pendaftaran.
+              </p>
 
-</div>
+              <div class="search-row">
+                <input id="keyword" placeholder="Masukkan nama peserta" />
 
-<h2>
+                <button onclick="cari()">Cari Sertifikat</button>
+              </div>
+            </div>
 
-Pencarian Sertifikat Kegiatan
+            <div id="hasil"></div>
 
-</h2>
+            <div class="footer-note">
+              Pastikan nama yang dimasukkan sesuai dengan data pendaftaran. Jika
+              sertifikat belum tersedia, silakan cek kembali secara berkala atau
+              hubungi panitia.
+            </div>
 
-<p class="notice">
+            <div class="hotline-card">
+              <h3>📞 Butuh Bantuan?</h3>
 
-<strong>
+              <p>
+                Jika mengalami kendala, silakan hubungi Panitia Direktorat
+                Teknologi dan Digitalisasi Pembelajaran.
+              </p>
 
-SERTIFIKAT TERSEDIA MINIMAL
-H+14 KERJA
-SETELAH PELAKSANAAN WEBINAR.
+              <a
+                href="https://wa.me/6287782214464"
+                target="_blank"
+                class="btn-wa"
+              >
+                💬 Hubungi via WhatsApp
+              </a>
+            </div>
+          </section>
 
-</strong>
-
-</p>
-
-<p class="description">
-
-Masukkan nama peserta
-untuk mencari sertifikat kegiatan.
-
-Pastikan nama sesuai
-dengan data pendaftaran.
-
-</p>
-
-<div class="search-row">
-
-<input
-    id="keyword"
-    placeholder="Masukkan nama peserta">
-
-<button
-    onclick="cari()">
-
-Cari Sertifikat
-
-</button>
-
-</div>
-
-</div>
-
-<div id="hasil"></div>
-
-<div class="footer-note">
-
-Pastikan nama yang dimasukkan
-sesuai dengan data pendaftaran.
-
-Jika sertifikat belum tersedia,
-silakan cek kembali secara berkala
-atau hubungi panitia.
-
-</div>
-
-<div class="hotline-card">
-
-<h3>
-
-📞 Butuh Bantuan?
-
-</h3>
-
-<p>
-
-Jika mengalami kendala,
-silakan hubungi Panitia Direktorat Teknologi dan Digitalisasi Pembelajaran.
-
-</p>
-
-<a
-    href="https://wa.me/6287782214464"
-    target="_blank"
-    class="btn-wa">
-
-💬 Hubungi via WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-<!-- ===================================================
+          <!-- ===================================================
      TAB PRESENSI
 =================================================== -->
 
-<section
-    id="tab-presensi"
-    class="tab-content">
+          <section id="tab-presensi" class="tab-content">
+            <div class="search-card">
+              <div class="icon-circle">📝</div>
 
-<div class="search-card">
+              <h2>Presensi Kegiatan</h2>
 
-<div class="icon-circle">
+              <p id="presensi-info">
+                Silakan mengisi daftar hadir kegiatan melalui tautan presensi
+                berikut.
+              </p>
 
-📝
+              <a
+                id="link-presensi"
+                href="#"
+                target="_blank"
+                class="btn-presensi"
+              >
+                Isi Presensi
+              </a>
+            </div>
 
-</div>
+            <div class="footer-note">
+              Pastikan data presensi diisi dengan benar karena akan digunakan
+              untuk kebutuhan administrasi kegiatan.
+            </div>
 
-<h2>
+            <div class="hotline-card">
+              <h3>📞 Butuh Bantuan?</h3>
 
-Presensi Kegiatan
+              <p>
+                Jika mengalami kendala presensi, akses streaming, file
+                pendukung, maupun sertifikat kegiatan, silakan hubungi Panitia
+                Direktorat Teknologi dan Digitalisasi Pembelajaran.
+              </p>
 
-</h2>
+              <a
+                href="https://wa.me/6287782214464"
+                target="_blank"
+                class="btn-wa"
+              >
+                💬 Hubungi via WhatsApp
+              </a>
+            </div>
+          </section>
 
-<p>
-
-Silakan mengisi daftar hadir kegiatan
-melalui tautan presensi berikut.
-
-</p>
-
-<a
-    id="link-presensi"
-    href="#"
-    target="_blank"
-    class="btn-presensi">
-
-Isi Presensi
-
-</a>
-
-</div>
-
-<div class="footer-note">
-
-Pastikan data presensi diisi dengan benar
-karena akan digunakan untuk kebutuhan
-administrasi kegiatan.
-
-</div>
-
-<div class="hotline-card">
-
-<h3>
-
-📞 Butuh Bantuan?
-
-</h3>
-
-<p>
-
-Jika mengalami kendala presensi,
-akses streaming,
-file pendukung,
-maupun sertifikat kegiatan,
-silakan hubungi
-Panitia Direktorat Teknologi dan Digitalisasi Pembelajaran.
-
-</p>
-
-<a
-    href="https://wa.me/6287782214464"
-    target="_blank"
-    class="btn-wa">
-
-💬 Hubungi via WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-<!-- ===================================================
+          <!-- ===================================================
      TAB FILES
 =================================================== -->
 
-<section
-    id="tab-files"
-    class="tab-content">
+          <section id="tab-files" class="tab-content">
+            <div class="files-grid">
+              <!-- Virtual Background -->
 
-<div class="files-grid">
+              <div class="file-card">
+                <h2>🖼️ Virtual Background</h2>
 
-    <!-- Virtual Background -->
+                <img
+                  id="vb-preview"
+                  class="vb-preview"
+                  src=""
+                  alt="Virtual Background"
+                  loading="lazy"
+                  decoding="async"
+                />
 
-    <div class="file-card">
+                <a id="btn-vb" href="#" target="_blank" class="btn-file">
+                  Simpan Gambar
+                </a>
+              </div>
 
-        <h2>
+              <!-- File Pendukung -->
 
-            🖼️ Virtual Background
+              <div class="file-card">
+                <div class="file-icon">📁</div>
 
-        </h2>
+                <h2>File Pendukung</h2>
 
-        <img
-    id="vb-preview"
-    class="vb-preview"
-    src=""
-    alt="Virtual Background"
-    loading="lazy"
-    decoding="async">
+                <p>
+                  Akses materi, panduan, maupun file pendukung kegiatan melalui
+                  Google Drive.
+                </p>
 
-        <a
-            id="btn-vb"
-            href="#"
-            target="_blank"
-            class="btn-file">
+                <a id="link-files" href="#" target="_blank" class="btn-file">
+                  Buka Google Drive
+                </a>
+              </div>
+            </div>
 
-            Simpan Gambar
+            <div class="hotline-card">
+              <h3>📞 Butuh Bantuan?</h3>
 
-        </a>
+              <p>
+                Jika mengalami kendala presensi, akses streaming, file
+                pendukung, maupun sertifikat kegiatan, silakan hubungi Panitia
+                Direktorat Teknologi dan Digitalisasi Pembelajaran.
+              </p>
 
-    </div>
+              <a
+                href="https://wa.me/6287782214464"
+                target="_blank"
+                class="btn-wa"
+              >
+                💬 Hubungi via WhatsApp
+              </a>
+            </div>
+          </section>
 
-    <!-- File Pendukung -->
-
-    <div class="file-card">
-
-        <div class="file-icon">
-
-            📁
-
-        </div>
-
-        <h2>
-
-            File Pendukung
-
-        </h2>
-
-        <p>
-
-            Akses materi,
-            panduan,
-            maupun file pendukung kegiatan
-            melalui Google Drive.
-
-        </p>
-
-        <a
-            id="link-files"
-            href="#"
-            target="_blank"
-            class="btn-file">
-
-            Buka Google Drive
-
-        </a>
-
-    </div>
-
-</div>
-
-<div class="hotline-card">
-
-    <h3>
-
-        📞 Butuh Bantuan?
-
-    </h3>
-
-    <p>
-
-        Jika mengalami kendala presensi,
-        akses streaming,
-        file pendukung,
-        maupun sertifikat kegiatan,
-        silakan hubungi
-        Panitia Direktorat Teknologi dan Digitalisasi Pembelajaran.
-
-    </p>
-
-    <a
-        href="https://wa.me/6287782214464"
-        target="_blank"
-        class="btn-wa">
-
-        💬 Hubungi via WhatsApp
-
-    </a>
-
-</div>
-
-</section>
-
-<!-- ===================================================
+          <!-- ===================================================
      TAB SIARAN
 =================================================== -->
 
-<section
-    id="tab-siaran"
-    class="tab-content">
+          <section id="tab-siaran" class="tab-content">
+            <div class="search-card">
+              <div class="icon-circle">📡</div>
 
-<div class="search-card">
+              <h2>Ruang Siaran</h2>
 
-<div class="icon-circle">
+              <p>
+                Silakan pilih platform di bawah ini untuk bergabung ke dalam
+                sesi live streaming kegiatan.
+              </p>
 
-📡
+              <div class="siaran-grid">
+                <!-- Zoom -->
 
-</div>
+                <a id="link-zoom" href="#" target="_blank" class="siaran-card">
+                  <div class="siaran-icon">
+                    <img
+                      src="https://img.icons8.com/?size=100&id=7csVZvHoQrLW&format=png&color=000000"
+                      alt="Zoom"
+                    />
+                  </div>
 
-<h2>
+                  <h3>Zoom Meeting</h3>
 
-Ruang Siaran
+                  <p>Interaksi Langsung</p>
+                </a>
 
-</h2>
+                <!-- YouTube -->
 
-<p>
+                <a
+                  id="link-youtube"
+                  href="#"
+                  target="_blank"
+                  class="siaran-card"
+                >
+                  <div class="siaran-icon">
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
+                      alt="YouTube"
+                    />
+                  </div>
 
-Silakan pilih platform di bawah ini
-untuk bergabung ke dalam sesi
-live streaming kegiatan.
+                  <h3>YouTube Live</h3>
 
-</p>
+                  <p>Nonton Saja</p>
+                </a>
+              </div>
+            </div>
 
-<div class="siaran-grid">
+            <div class="hotline-card">
+              <h3>📞 Butuh Bantuan?</h3>
 
-<!-- Zoom -->
+              <p>
+                Jika mengalami kendala presensi, akses streaming, file
+                pendukung, maupun sertifikat kegiatan, silakan hubungi Panitia
+                Direktorat Teknologi dan Digitalisasi Pembelajaran.
+              </p>
 
-<a
-    id="link-zoom"
-    href="#"
-    target="_blank"
-    class="siaran-card">
+              <a
+                href="https://wa.me/6287782214464"
+                target="_blank"
+                class="btn-wa"
+              >
+                💬 Hubungi via WhatsApp
+              </a>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
 
-<div class="siaran-icon">
-
-<img
-src="https://img.icons8.com/?size=100&id=7csVZvHoQrLW&format=png&color=000000"
-alt="Zoom">
-
-</div>
-
-<h3>
-
-Zoom Meeting
-
-</h3>
-
-<p>
-
-Interaksi Langsung
-
-</p>
-
-</a>
-
-<!-- YouTube -->
-
-<a
-    id="link-youtube"
-    href="#"
-    target="_blank"
-    class="siaran-card">
-
-<div class="siaran-icon">
-
-<img
-src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png"
-alt="YouTube">
-
-</div>
-
-<h3>
-
-YouTube Live
-
-</h3>
-
-<p>
-
-Nonton Saja
-
-</p>
-
-</a>
-
-</div>
-
-</div>
-
-<div class="hotline-card">
-
-<h3>
-
-📞 Butuh Bantuan?
-
-</h3>
-
-<p>
-
-Jika mengalami kendala presensi,
-akses streaming,
-file pendukung,
-maupun sertifikat kegiatan,
-silakan hubungi
-Panitia Direktorat Teknologi dan Digitalisasi Pembelajaran.
-
-</p>
-
-<a
-    href="https://wa.me/6287782214464"
-    target="_blank"
-    class="btn-wa">
-
-💬 Hubungi via WhatsApp
-
-</a>
-
-</div>
-
-</section>
-
-</div>
-
-</main>
-
-</div>
-
-<script src="../js/config.js"></script>
-<script src="../js/api.js"></script>
-<script src="../js/kegiatan.js"></script>
-
-</body>
-
+    <script src="../js/config.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/kegiatan.js"></script>
+  </body>
 </html>

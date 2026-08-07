@@ -579,30 +579,31 @@ button:hover {
 
   align-items: center;
 
-  width: 100%;
+  width: 280px;
 
-  padding: 11px 18px;
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  padding: 14px 24px;
 
   background: #198754;
 
-  color: #ffffff;
+  color: #fff;
+
+  border-radius: 14px;
+
+  font-weight: 700;
 
   text-decoration: none;
 
-  border-radius: 10px;
-
-  font-size: 14px;
-
-  font-weight: 600;
-
-  transition:
-    background 0.2s,
-    transform 0.2s;
+  transition: 0.25s;
 }
 
-.btn-download:hover,
 .btn-presensi:hover {
   background: #157347;
+
+  transform: translateY(-2px);
 }
 
 .btn-download-secondary {
@@ -1495,11 +1496,39 @@ button:hover {
 =========================== */
 
 .disabled {
-  opacity: 0.5;
+  opacity: 0.55;
 
   cursor: not-allowed !important;
 
   pointer-events: none;
 
   filter: grayscale(100%);
+}
+
+.btn-presensi-disabled {
+  background: #cbd5e1 !important;
+
+  color: #64748b !important;
+
+  border: none;
+
+  width: 280px;
+
+  max-width: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  pointer-events: none;
+
+  cursor: not-allowed;
+
+  box-shadow: none;
+
+  transform: none;
 }
