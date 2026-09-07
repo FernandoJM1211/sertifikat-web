@@ -271,7 +271,7 @@ body{
 
     gap:24px;
 
-    align-items:start;
+    align-items:stretch;
 
 }
 
@@ -302,6 +302,12 @@ body{
 
     color:inherit;
 
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
 }
 
 .kegiatan-card:hover{
@@ -326,6 +332,8 @@ body{
     overflow:hidden;
 
     aspect-ratio:4/5;
+
+    flex-shrink:0;
 
 }
 
@@ -363,6 +371,14 @@ body{
         18px
         20px
         22px;
+
+    min-height:150px;
+
+    flex:1;
+
+    display:flex;
+
+    flex-direction:column;
 
 }
 
@@ -445,6 +461,20 @@ body{
     line-height:1.5;
 
     text-align:center;
+
+    display:-webkit-box;
+
+    display:box;
+
+    -webkit-box-orient:vertical;
+
+    box-orient:vertical;
+
+    -webkit-line-clamp:3;
+
+    line-clamp:3;
+
+    overflow:hidden;
 
 }
 
@@ -677,89 +707,92 @@ body{
 
 @media(max-width:992px){
 
-.kegiatan-grid{
+    .kegiatan-grid{
 
-    grid-template-columns:
-        repeat(2,1fr);
+        grid-template-columns:
+            repeat(2,1fr);
+
+    }
 
 }
 
-}
+/* ===========================
+   MOBILE
+=========================== */
 
 @media(max-width:768px){
 
-.page-header{
+    .page-header{
 
-    padding:20px;
+        padding:20px;
 
-}
+    }
 
-.header-content{
+    .header-content{
 
-    flex-direction:column;
+        flex-direction:column;
 
-    text-align:center;
+        text-align:center;
 
-}
+    }
 
-.header-logo{
+    .header-logo{
 
-    width:80px;
+        width:80px;
 
-    height:80px;
+        height:80px;
 
-}
+    }
 
-.header-logo img{
+    .header-logo img{
 
-    width:95px;
+        width:95px;
 
-}
+    }
 
-.header-title h1{
+    .header-title h1{
 
-    font-size:26px;
+        font-size:26px;
 
-}
+    }
 
-.hero{
+    .hero{
 
-    padding:24px;
+        padding:24px;
 
-}
+    }
 
-.hero h2{
+    .hero h2{
 
-    font-size:24px;
+        font-size:24px;
 
-}
+    }
 
-.container{
+    .container{
 
-    padding:
-        24px
-        18px
-        50px;
+        padding:
+            24px
+            18px
+            50px;
 
-}
+    }
 
-.section-header h2{
+    .section-header h2{
 
-    font-size:26px;
+        font-size:26px;
 
-}
+    }
 
-.kegiatan-grid{
+    .kegiatan-grid{
 
-    grid-template-columns:1fr;
+        grid-template-columns:1fr;
 
-}
+    }
 
-.empty-state{
+    .empty-state{
 
-    padding:50px 20px;
+        padding:50px 20px;
 
-}
-
+    }
 
 }
