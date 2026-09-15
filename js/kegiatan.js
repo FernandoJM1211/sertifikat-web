@@ -485,7 +485,7 @@ function tampilkan(data) {
 
                 <span class="status-proses">
 
-                    Sertifikat Masih Diproses
+                    Masih Diproses
 
                 </span>
 
