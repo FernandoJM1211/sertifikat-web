@@ -2,188 +2,300 @@
 <html lang="id">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
+    <title>Portal Kegiatan Tekdijar - Pindah Alamat</title>
 
-    <title>
+    <link rel="icon" href="images/logo-lan.png">
 
-        Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
+    <style>
+        :root {
+            --primary: #0b3b78;
+            --primary-light: #e8f3ff;
+            --text: #29496f;
+            --muted: #6b83a1;
+            --white: #ffffff;
+            --border: #dfeaf6;
+            --background: #f3f8fe;
+            --button: #0d6efd;
+            --button-hover: #0b5ed7;
+        }
 
-    </title>
+        * {
+            box-sizing: border-box;
+        }
 
-    <link
-        rel="icon"
-        href="images/logo-lan.png">
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            color: var(--text);
+            background:
+                linear-gradient(180deg, #edf6ff 0%, #f7fbff 48%, #ffffff 100%);
+            display: flex;
+            flex-direction: column;
+        }
 
-    <link
-        rel="stylesheet"
-        href="css/home.css">
+        .page-header {
+            width: 100%;
+            padding: 30px 4vw 20px;
+        }
 
+        .header-content {
+            max-width: 1500px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 26px;
+        }
+
+        .header-logo {
+            width: 114px;
+            height: 114px;
+            flex: 0 0 114px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--white);
+            border-radius: 22px;
+            box-shadow: 0 10px 28px rgba(20, 65, 110, 0.10);
+        }
+
+        .header-logo img {
+            width: 82px;
+            height: 82px;
+            object-fit: contain;
+        }
+
+        .header-title h1 {
+            margin: 0 0 8px;
+            color: var(--primary);
+            font-size: clamp(30px, 3vw, 48px);
+            line-height: 1.15;
+            font-weight: 700;
+        }
+
+        .header-title p {
+            margin: 0;
+            color: #49688d;
+            font-size: clamp(18px, 1.5vw, 24px);
+        }
+
+        .main {
+            flex: 1;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 24px 80px;
+        }
+
+        .notice-card {
+            width: 100%;
+            max-width: 900px;
+            padding: 58px 60px 54px;
+            text-align: center;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: 0 14px 36px rgba(23, 67, 112, 0.09);
+        }
+
+        .notice-card h2 {
+            margin: 0 0 18px;
+            color: var(--primary);
+            font-size: clamp(26px, 3vw, 38px);
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .notice-card p {
+            max-width: 720px;
+            margin: 0 auto 12px;
+            color: var(--text);
+            font-size: 17px;
+            line-height: 1.75;
+        }
+
+        .new-address {
+            max-width: 680px;
+            margin: 28px auto 24px;
+            padding: 16px 22px;
+            background: #f5f9fe;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: var(--button);
+            font-size: 16px;
+            font-weight: 700;
+            word-break: break-word;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            padding: 13px 25px;
+            border-radius: 10px;
+            background: var(--button);
+            color: var(--white);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 600;
+            box-shadow: 0 5px 14px rgba(13, 110, 253, 0.18);
+            transition: 0.2s ease;
+        }
+
+        .button:hover {
+            background: var(--button-hover);
+            transform: translateY(-1px);
+        }
+
+        .redirect-info {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .footer {
+            padding: 0 24px 28px;
+            text-align: center;
+            color: #8aa0ba;
+            font-size: 13px;
+        }
+
+        @media (max-width: 700px) {
+            .page-header {
+                padding: 24px 20px 12px;
+            }
+
+            .header-content {
+                gap: 16px;
+            }
+
+            .header-logo {
+                width: 72px;
+                height: 72px;
+                flex-basis: 72px;
+                border-radius: 16px;
+            }
+
+            .header-logo img {
+                width: 52px;
+                height: 52px;
+            }
+
+            .header-title h1 {
+                font-size: 20px;
+                margin-bottom: 5px;
+            }
+
+            .header-title p {
+                font-size: 14px;
+            }
+
+            .main {
+                padding: 30px 18px 55px;
+            }
+
+            .notice-card {
+                padding: 40px 22px 36px;
+                border-radius: 20px;
+            }
+
+            .notice-icon {
+                width: 66px;
+                height: 66px;
+                font-size: 30px;
+                margin-bottom: 20px;
+            }
+
+            .notice-card h2 {
+                font-size: 25px;
+            }
+
+            .notice-card p {
+                font-size: 15px;
+                line-height: 1.7;
+            }
+
+            .new-address {
+                font-size: 14px;
+                padding: 14px 16px;
+                margin-top: 22px;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- =========================================
-HEADER
-========================================= -->
-
-<header class="page-header">
-
-    <div class="header-overlay">
-
+    <header class="page-header">
         <div class="header-content">
 
             <div class="header-logo">
-
-                <img
-                    src="images/logo-lan.png"
-                    alt="Logo LAN">
-
+                <img src="images/logo-lan.png" alt="Logo LAN">
             </div>
 
             <div class="header-title">
-
-                <h1>
-
-                    Direktorat Teknologi dan Digitalisasi Pembelajaran
-
-                </h1>
-
-                <p>
-
-                    Lembaga Administrasi Negara
-
-                </p>
-
+                <h1>Direktorat Teknologi dan Digitalisasi Pembelajaran</h1>
+                <p>Lembaga Administrasi Negara</p>
             </div>
 
         </div>
+    </header>
 
-        <section class="hero">
+    <main class="main">
 
-            <h2>
+        <section class="notice-card">
 
-                Portal Kegiatan
-
+             <h2>
+                Portal Kegiatan Telah Dipindahkan
             </h2>
 
             <p>
-
-                Temukan seluruh kegiatan yang diselenggarakan oleh
-                Direktorat Teknologi dan Digitalisasi Pembelajaran.
-                Mulai dari informasi kegiatan, presensi,
-                live streaming, file pendukung,
-                hingga pencarian sertifikat.
-
+                Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
+                telah berpindah ke alamat baru.
             </p>
+
+            <p>
+                Silakan menggunakan alamat baru untuk mengakses informasi kegiatan,
+                presensi, live streaming, file pendukung, dan layanan sertifikat.
+            </p>
+
+            <div class="new-address">
+                portal-kegiatan-tekdijar.vercel.app
+            </div>
+
+            <a
+                class="button"
+                href="https://portal-kegiatan-tekdijar.vercel.app/">
+                Buka Portal Kegiatan Tekdijar
+            </a>
+
+            <div class="redirect-info">
+                Anda akan diarahkan secara otomatis dalam 10 detik.
+            </div>
 
         </section>
 
-    </div>
+    </main>
 
-</header>
+    <footer class="footer">
+        Direktorat Teknologi dan Digitalisasi Pembelajaran · Lembaga Administrasi Negara
+    </footer>
 
-<!-- =========================================
-MAIN
-========================================= -->
-
-<main class="container">
-
-    <section class="section-header">
-
-        <h2>
-
-            Daftar Kegiatan
-
-        </h2>
-
-        <p>
-
-            Pilih salah satu kegiatan di bawah ini.
-
-        </p>
-
-    </section>
-
-    <!-- =====================================
-    DAFTAR KEGIATAN
-    ====================================== -->
-
-    <section
-        id="kegiatan-container"
-        class="kegiatan-container">
-
-        <!-- Skeleton -->
-
-        <div
-            id="kegiatan-skeleton"
-            class="kegiatan-grid">
-
-        </div>
-
-        <!-- Grid -->
-
-        <div
-            id="kegiatan-grid"
-            class="kegiatan-grid"
-            style="display:none;">
-
-        </div>
-
-        <!-- Empty State -->
-
-        <div
-            id="empty-state"
-            class="empty-state"
-            style="display:none;">
-
-            <div class="empty-icon">
-
-                📅
-
-            </div>
-
-            <h3>
-
-                Belum Ada Kegiatan Aktif
-
-            </h3>
-
-            <p>
-
-                Saat ini belum terdapat kegiatan yang sedang dibuka.
-                Silakan kunjungi kembali beberapa waktu lagi.
-
-            </p>
-
-        </div>
-
-    </section>
-
-</main>
-
-<!-- =========================================
-SCRIPT
-========================================= -->
-
-<script src="js/config.js"></script>
-
-<script src="js/api.js"></script>
-
-<script src="js/home.js"></script>
-
-   <!-- Vercel Analytics -->
     <script>
-      window.va = window.va || function () {
-        (window.vaq = window.vaq || []).push(arguments);
-      };
+        setTimeout(function () {
+            window.location.href = "https://portal-kegiatan-tekdijar.vercel.app/";
+        }, 10000);
     </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    
+
 </body>
 
 </html>
