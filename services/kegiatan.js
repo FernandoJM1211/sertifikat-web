@@ -56,12 +56,13 @@ async function loadKegiatan() {
         flyer: row[3] || "",
         tanggal: row[4] || "",
         waktu: row[5] || "",
-        deskripsi: row[6] || "",
-        zoom: row[7] || "",
-        youtube: row[8] || "",
-        virtualBackground: row[9] || "",
-        presensi: row[10] || "",
-        files: row[11] || "",
+        waktuSelesai: row[6] || "",
+        deskripsi: row[7] || "",
+        zoom: row[8] || "",
+        youtube: row[9] || "",
+        virtualBackground: row[10] || "",
+        presensi: row[11] || "",
+        files: row[12] || "",
 
       }))
       .filter(item => item.kode);
@@ -102,8 +103,8 @@ async function getDaftarKegiatan() {
         .toLowerCase() === "aktif"
     )
 
-      .reverse()
-      
+    .reverse()
+
     .map(item => ({
 
       kode: item.kode,

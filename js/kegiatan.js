@@ -104,7 +104,7 @@ function setKegiatan(data) {
     flyer.src = "../images/logo-lan.png";
   };
 
-  document.getElementById("info-tanggal").innerText = data.tanggal || "-";
+  document.getElementById("info-tanggal").innerText = formatTanggal(data.tanggal);
 
   const status = getStatusKegiatan(data.tanggal);
 
@@ -114,7 +114,7 @@ function setKegiatan(data) {
 
   badge.className = `status-badge ${status.className}`;
 
-  document.getElementById("info-waktu").innerText = data.waktu || "-";
+  document.getElementById("info-waktu").innerText = formatRentangWaktu(data.waktu, data.waktuSelesai);
 
   document.getElementById("info-deskripsi").innerText = data.deskripsi || "-";
 
@@ -170,6 +170,8 @@ PRESENSI
 
   const infoPresensi = document.getElementById("presensi-info");
 
+  const infoPenutupan = getOrCreatePresensiPenutupanInfo(btnPresensi);
+
   if (data.presensi && data.presensi.trim() !== "") {
     btnPresensi.innerText = "Isi Presensi";
 
@@ -185,6 +187,125 @@ PRESENSI
     infoPresensi.innerText =
       "Tautan presensi belum tersedia atau telah ditutup oleh panitia.";
   }
+
+  infoPenutupan.innerText =
+    "Daftar hadir akan ditutup 60 menit setelah acara di Zoom Workplace berakhir.";
+  infoPenutupan.style.display = "block";
+}
+
+/*
+=====================================================
+FORMAT TANGGAL DAN WAKTU
+=====================================================
+*/
+
+function formatTanggal(tanggal) {
+  if (!tanggal) {
+    return "-";
+  }
+
+  const text = String(tanggal).trim();
+
+  const match = text.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+
+  if (match) {
+    const day = match[1].padStart(2, "0");
+    const month = match[2].padStart(2, "0");
+    const year = match[3];
+
+    return `${day}/${month}/${year}`;
+  }
+
+  return text;
+}
+
+function formatWaktu(waktu) {
+  if (!waktu) {
+    return "";
+  }
+
+  const text = String(waktu).trim();
+
+  const match = text.match(
+    /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i
+  );
+
+  if (!match) {
+    return text;
+  }
+
+  let hour = Number(match[1]);
+  const minute = match[2];
+  const period = match[3].toUpperCase();
+
+  if (period === "AM") {
+    if (hour === 12) {
+      hour = 0;
+    }
+  } else if (hour !== 12) {
+    hour += 12;
+  }
+
+  return `${String(hour).padStart(2, "0")}.${minute}`;
+}
+
+function formatRentangWaktu(waktuMulai, waktuSelesai) {
+  const mulai = formatWaktu(waktuMulai);
+  const selesai = formatWaktu(waktuSelesai);
+
+  if (mulai && selesai) {
+    return `${mulai} – ${selesai} WIB`;
+  }
+
+  if (mulai) {
+    return `${mulai} WIB`;
+  }
+
+  if (selesai) {
+    return `${selesai} WIB`;
+  }
+
+  return "-";
+}
+
+function getOrCreatePresensiPenutupanInfo(button) {
+  let element = document.getElementById("presensi-penutupan-info");
+
+  if (element) {
+    return element;
+  }
+
+  element = document.createElement("div");
+  element.id = "presensi-penutupan-info";
+  element.className = "presensi-penutupan-info";
+
+  element.style.marginTop = "22px";
+  element.style.fontSize = "14px";
+  element.style.lineHeight = "1.5";
+  element.style.textAlign = "center";
+  element.style.color = "#6b7280";
+
+  button.insertAdjacentElement("afterend", element);
+
+  return element;
+}
+
+function parseTanggalIndonesia(tanggal) {
+  const text = String(tanggal).trim();
+
+  const match = text.match(
+    /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+  );
+
+  if (match) {
+    const day = Number(match[1]);
+    const month = Number(match[2]) - 1;
+    const year = Number(match[3]);
+
+    return new Date(year, month, day);
+  }
+
+  return new Date(tanggal);
 }
 
 function getStatusKegiatan(tanggal) {
@@ -195,8 +316,7 @@ function getStatusKegiatan(tanggal) {
     };
   }
 
-  const eventDate = new Date(tanggal);
-
+  const eventDate = parseTanggalIndonesia(tanggal);
   const today = new Date();
 
   eventDate.setHours(0, 0, 0, 0);

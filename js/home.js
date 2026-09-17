@@ -44,29 +44,18 @@ async function loadKegiatan() {
     for (let i = 0; i < skeletonCount; i++) {
 
         skeleton.insertAdjacentHTML(
-
             "beforeend",
-
             `
-
             <div class="skeleton-card">
-
                 <div class="skeleton-image"></div>
 
                 <div class="skeleton-content">
-
                     <div class="skeleton-line short"></div>
-
                     <div class="skeleton-line long"></div>
-
                     <div class="skeleton-line medium"></div>
-
                 </div>
-
             </div>
-
             `
-
         );
 
     }
@@ -119,7 +108,6 @@ async function loadKegiatan() {
         setTimeout(() => {
 
             skeleton.style.display = "none";
-
             grid.style.display = "block";
 
             showError(
@@ -148,7 +136,6 @@ function renderKegiatan(kegiatan) {
         document.getElementById("empty-state");
 
     grid.innerHTML = "";
-
     empty.style.display = "none";
 
     grid.classList.remove("fade-in");
@@ -163,7 +150,6 @@ function renderKegiatan(kegiatan) {
     if (!kegiatan.length) {
 
         empty.style.display = "block";
-
         empty.classList.add("fade-in");
 
         return;
@@ -177,17 +163,13 @@ function renderKegiatan(kegiatan) {
     */
 
     grid.style.display = "grid";
-
     grid.classList.add("fade-in");
 
     kegiatan.forEach(item => {
 
         grid.insertAdjacentHTML(
-
             "beforeend",
-
             createCard(item)
-
         );
 
     });
@@ -205,29 +187,23 @@ function getStatusKegiatan(tanggal) {
     if (!tanggal) {
 
         return {
-
             text: "-",
             className: "status-finished"
-
         };
 
     }
 
-    const eventDate = new Date(tanggal);
-
+    const eventDate = parseTanggalIndonesia(tanggal);
     const today = new Date();
 
     eventDate.setHours(0, 0, 0, 0);
-
     today.setHours(0, 0, 0, 0);
 
     if (eventDate.getTime() === today.getTime()) {
 
         return {
-
             text: "Hari ini",
             className: "status-today"
-
         };
 
     }
@@ -235,20 +211,44 @@ function getStatusKegiatan(tanggal) {
     if (eventDate > today) {
 
         return {
-
             text: "Akan Datang",
             className: "status-coming"
-
         };
 
     }
 
     return {
-
         text: "Selesai",
         className: "status-finished"
-
     };
+
+}
+
+/*
+=========================================
+PARSE TANGGAL DD/MM/YYYY
+=========================================
+*/
+
+function parseTanggalIndonesia(tanggal) {
+
+    const text = String(tanggal).trim();
+
+    const match = text.match(
+        /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+    );
+
+    if (match) {
+
+        const day = Number(match[1]);
+        const month = Number(match[2]) - 1;
+        const year = Number(match[3]);
+
+        return new Date(year, month, day);
+
+    }
+
+    return new Date(tanggal);
 
 }
 
@@ -267,7 +267,6 @@ function createCard(item) {
         getStatusKegiatan(item.tanggal);
 
     return `
-
         <a
             href="pages/kegiatan.html?kode=${encodeURIComponent(item.kode)}"
             class="kegiatan-card fade-in">
@@ -288,33 +287,25 @@ function createCard(item) {
                 <div class="card-meta">
 
                     <div class="card-date">
-
                         📅 ${item.tanggal}
-
                     </div>
 
                     <div class="card-status ${status.className}">
-
                         ${status.text}
-
                     </div>
 
                 </div>
 
                 <h3>
-
                     ${item.nama}
-
                 </h3>
 
             </div>
 
         </a>
-
     `;
 
 }
-
 
 /*
 =========================================
@@ -325,9 +316,7 @@ KONVERSI LINK GOOGLE DRIVE
 function convertDriveImage(url) {
 
     if (!url) {
-
         return "";
-
     }
 
     const text =
@@ -342,21 +331,15 @@ function convertDriveImage(url) {
     let id = "";
 
     if (match1) {
-
         id = match1[1];
-
     }
 
     else if (match2) {
-
         id = match2[1];
-
     }
 
     if (!id) {
-
         return text;
-
     }
 
     return `https://drive.google.com/thumbnail?id=${id}&sz=w1000`;
@@ -372,13 +355,9 @@ ERROR
 function showError(container, message) {
 
     container.innerHTML = `
-
         <div class="error">
-
             ${message}
-
         </div>
-
     `;
 
 }
@@ -390,9 +369,6 @@ INIT
 */
 
 document.addEventListener(
-
     "DOMContentLoaded",
-
     loadKegiatan
-
 );
