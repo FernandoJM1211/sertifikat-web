@@ -279,7 +279,7 @@ function getOrCreatePresensiPenutupanInfo(button) {
   element.id = "presensi-penutupan-info";
   element.className = "presensi-penutupan-info";
 
-  element.style.marginTop = "22px";
+  element.style.marginTop = "12px";
   element.style.fontSize = "14px";
   element.style.lineHeight = "1.5";
   element.style.textAlign = "center";
@@ -294,13 +294,17 @@ function parseTanggalIndonesia(tanggal) {
   const text = String(tanggal).trim();
 
   const match = text.match(
-    /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/
+    /^(\d{1,2})\/(\d{1,2})\/(\d{2}|\d{4})$/
   );
 
   if (match) {
     const day = Number(match[1]);
     const month = Number(match[2]) - 1;
-    const year = Number(match[3]);
+    let year = Number(match[3]);
+
+    if (match[3].length === 2) {
+      year += 2000;
+    }
 
     return new Date(year, month, day);
   }
