@@ -106,7 +106,11 @@ function setKegiatan(data) {
 
   document.getElementById("info-tanggal").innerText = formatTanggal(data.tanggal);
 
-  const status = getStatusKegiatan(data.tanggal);
+  const status = getStatusKegiatan(
+    data.tanggal,
+    data.waktu,
+    data.waktuSelesai
+  );
 
   const badge = document.getElementById("info-status");
 
@@ -312,7 +316,37 @@ function parseTanggalIndonesia(tanggal) {
   return new Date(tanggal);
 }
 
-function getStatusKegiatan(tanggal) {
+function buatTanggalDenganWaktu(tanggal, waktu) {
+  const text = String(waktu).trim();
+
+  const match = text.match(
+    /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i
+  );
+
+  const result = new Date(tanggal);
+
+  if (!match) {
+    return result;
+  }
+
+  let hour = Number(match[1]);
+  const minute = Number(match[2]);
+  const period = match[3].toUpperCase();
+
+  if (period === "AM") {
+    if (hour === 12) {
+      hour = 0;
+    }
+  } else if (hour !== 12) {
+    hour += 12;
+  }
+
+  result.setHours(hour, minute, 0, 0);
+
+  return result;
+}
+
+function getStatusKegiatan(tanggal, waktuMulai, waktuSelesai) {
   if (!tanggal) {
     return {
       text: "-",
@@ -321,32 +355,54 @@ function getStatusKegiatan(tanggal) {
   }
 
   const eventDate = parseTanggalIndonesia(tanggal);
-  const today = new Date();
+  const now = new Date();
 
   eventDate.setHours(0, 0, 0, 0);
 
+  const today = new Date();
   today.setHours(0, 0, 0, 0);
 
-  if (eventDate.getTime() === today.getTime()) {
+  if (eventDate < today) {
     return {
-      text: "Hari ini",
-
-      className: "status-today",
+      text: "Selesai",
+      className: "status-finished",
     };
   }
 
   if (eventDate > today) {
     return {
       text: "Akan Datang",
-
       className: "status-coming",
     };
   }
 
-  return {
-    text: "Selesai",
+  if (!waktuMulai || !waktuSelesai) {
+    return {
+      text: "Hari ini",
+      className: "status-today",
+    };
+  }
 
-    className: "status-finished",
+  const waktuMulaiDate = buatTanggalDenganWaktu(eventDate, waktuMulai);
+  const waktuSelesaiDate = buatTanggalDenganWaktu(eventDate, waktuSelesai);
+
+  if (now < waktuMulaiDate) {
+    return {
+      text: "Akan Datang",
+      className: "status-coming",
+    };
+  }
+
+  if (now >= waktuSelesaiDate) {
+    return {
+      text: "Selesai",
+      className: "status-finished",
+    };
+  }
+
+  return {
+    text: "Sedang Berlangsung",
+    className: "status-today",
   };
 }
 

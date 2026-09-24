@@ -111,6 +111,8 @@ async function getDaftarKegiatan() {
       nama: item.nama,
       flyer: item.flyer,
       tanggal: item.tanggal,
+      waktu: item.waktu,
+      waktuSelesai: item.waktuSelesai,
       status: item.status
 
     }));

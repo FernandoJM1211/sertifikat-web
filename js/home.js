@@ -182,7 +182,7 @@ STATUS KEGIATAN
 =========================================
 */
 
-function getStatusKegiatan(tanggal) {
+function getStatusKegiatan(tanggal, waktuMulai, waktuSelesai) {
 
     if (!tanggal) {
 
@@ -194,20 +194,24 @@ function getStatusKegiatan(tanggal) {
     }
 
     const eventDate = parseTanggalIndonesia(tanggal);
-    const today = new Date();
+    const now = new Date();
 
     eventDate.setHours(0, 0, 0, 0);
+
+    const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    if (eventDate.getTime() === today.getTime()) {
+    // Kegiatan sudah lewat tanggalnya
+    if (eventDate < today) {
 
         return {
-            text: "Hari ini",
-            className: "status-today"
+            text: "Selesai",
+            className: "status-finished"
         };
 
     }
 
+    // Kegiatan masih akan datang
     if (eventDate > today) {
 
         return {
@@ -217,10 +221,84 @@ function getStatusKegiatan(tanggal) {
 
     }
 
+    // Tanggal sama dengan hari ini.
+    // Jika waktu belum tersedia, pertahankan status lama.
+    if (!waktuMulai || !waktuSelesai) {
+
+        return {
+            text: "Hari ini",
+            className: "status-today"
+        };
+
+    }
+
+    const waktuMulaiDate =
+        buatTanggalDenganWaktu(eventDate, waktuMulai);
+
+    const waktuSelesaiDate =
+        buatTanggalDenganWaktu(eventDate, waktuSelesai);
+
+    // Sebelum waktu mulai
+    if (now < waktuMulaiDate) {
+
+        return {
+            text: "Akan Datang",
+            className: "status-coming"
+        };
+
+    }
+
+    // Setelah waktu selesai
+    if (now >= waktuSelesaiDate) {
+
+        return {
+            text: "Selesai",
+            className: "status-finished"
+        };
+
+    }
+
+    // Sedang berlangsung
     return {
-        text: "Selesai",
-        className: "status-finished"
+        text: "Sedang Berlangsung",
+        className: "status-today"
     };
+
+}
+
+function buatTanggalDenganWaktu(tanggal, waktu) {
+
+    const text = String(waktu).trim();
+
+    const match = text.match(
+        /^(\d{1,2}):(\d{2})(?::\d{2})?\s*(AM|PM)$/i
+    );
+
+    const result = new Date(tanggal);
+
+    if (!match) {
+        return result;
+    }
+
+    let hour = Number(match[1]);
+    const minute = Number(match[2]);
+    const period = match[3].toUpperCase();
+
+    if (period === "AM") {
+
+        if (hour === 12) {
+            hour = 0;
+        }
+
+    } else if (hour !== 12) {
+
+        hour += 12;
+
+    }
+
+    result.setHours(hour, minute, 0, 0);
+
+    return result;
 
 }
 
@@ -268,7 +346,11 @@ function createCard(item) {
         convertDriveImage(item.flyer);
 
     const status =
-        getStatusKegiatan(item.tanggal);
+        getStatusKegiatan(
+            item.tanggal,
+            item.waktu,
+            item.waktuSelesai
+        );
 
     return `
         <a
