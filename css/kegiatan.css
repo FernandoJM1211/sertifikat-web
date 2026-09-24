@@ -700,6 +700,7 @@ button:hover {
   box-shadow: var(--shadow);
 }
 
+
 /* =====================================================
    FLYER
 ===================================================== */
@@ -900,6 +901,12 @@ button:hover {
   padding: 20px;
 
   text-align: center;
+}
+
+.files-grid .file-card:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .file-card h2 {
