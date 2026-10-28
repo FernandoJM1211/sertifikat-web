@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0">
 
     <title>
-
         Portal Kegiatan Direktorat Teknologi dan Digitalisasi Pembelajaran
-
     </title>
 
     <link
@@ -23,7 +21,10 @@
         rel="stylesheet"
         href="css/home.css">
 
-        <link rel="stylesheet" href="css/skm-popup.css">
+    <link
+        rel="stylesheet"
+        href="css/skm-popup.css">
+
 </head>
 
 <body>
@@ -49,15 +50,11 @@ HEADER
             <div class="header-title">
 
                 <h1>
-
                     Direktorat Teknologi dan Digitalisasi Pembelajaran
-
                 </h1>
 
                 <p>
-
                     Lembaga Administrasi Negara
-
                 </p>
 
             </div>
@@ -67,19 +64,15 @@ HEADER
         <section class="hero">
 
             <h2>
-
                 Portal Kegiatan
-
             </h2>
 
             <p>
-
                 Temukan seluruh kegiatan yang diselenggarakan oleh
                 Direktorat Teknologi dan Digitalisasi Pembelajaran.
                 Mulai dari informasi kegiatan, presensi,
                 live streaming, file pendukung,
                 hingga pencarian sertifikat.
-
             </p>
 
         </section>
@@ -94,21 +87,30 @@ MAIN
 
 <main class="container">
 
-    <section class="section-header">
+    
+<section class="section-header">
+    <h2>Daftar Kegiatan</h2>
+    <p>Pilih salah satu kegiatan di bawah ini.</p>
+</section>
 
-        <h2>
+<!-- Pencarian Kegiatan -->
+<div class="kegiatan-search">
+    
+<span class="kegiatan-search-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" focusable="false">
+        <circle cx="10.8" cy="10.8" r="6.5"></circle>
+        <path d="m16 16 4.2 4.2"></path>
+    </svg>
+</span>
 
-            Daftar Kegiatan
+    <input
+        type="search"
+        id="kegiatan-search-input"
+        placeholder="Cari nama kegiatan..."
+        aria-label="Cari nama kegiatan"
+        autocomplete="off">
+</div>
 
-        </h2>
-
-        <p>
-
-            Pilih salah satu kegiatan di bawah ini.
-
-        </p>
-
-    </section>
 
     <!-- =====================================
     DAFTAR KEGIATAN
@@ -123,7 +125,6 @@ MAIN
         <div
             id="kegiatan-skeleton"
             class="kegiatan-grid">
-
         </div>
 
         <!-- Grid -->
@@ -132,8 +133,15 @@ MAIN
             id="kegiatan-grid"
             class="kegiatan-grid"
             style="display:none;">
-
         </div>
+
+        <!-- Pagination -->
+
+        <nav
+            id="kegiatan-pagination"
+            class="kegiatan-pagination"
+            aria-label="Navigasi halaman kegiatan">
+        </nav>
 
         <!-- Empty State -->
 
@@ -143,22 +151,16 @@ MAIN
             style="display:none;">
 
             <div class="empty-icon">
-
                 📅
-
             </div>
 
             <h3>
-
                 Belum Ada Kegiatan Aktif
-
             </h3>
 
             <p>
-
                 Saat ini belum terdapat kegiatan yang sedang dibuka.
                 Silakan kunjungi kembali beberapa waktu lagi.
-
             </p>
 
         </div>
@@ -177,15 +179,22 @@ SCRIPT
 
 <script src="js/home.js"></script>
 
-   <!-- Vercel Analytics -->
-    <script>
-      window.va = window.va || function () {
+<script src="js/home-pagination.js"></script>
+
+<!-- Vercel Analytics -->
+
+<script>
+    window.va = window.va || function () {
         (window.vaq = window.vaq || []).push(arguments);
-      };
-    </script>
-    <script defer src="/_vercel/insights/script.js"></script>
-    
-    <script src="js/skm-popup.js"></script>
+    };
+</script>
+
+<script defer src="/_vercel/insights/script.js"></script>
+
+<!-- SKM Popup -->
+
+<script src="js/skm-popup.js"></script>
+
 </body>
 
 </html>
