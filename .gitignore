@@ -3,3 +3,9 @@ credentials/
 .env
 .vercel
 .env*
+
+# Nuxt
+.nuxt/
+.output/
+.data/
+dist/

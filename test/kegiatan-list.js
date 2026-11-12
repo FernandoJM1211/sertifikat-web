@@ -6,12 +6,12 @@ export const options = {
     duration: "30s",
 };
 
-const BASE_URL = "https://sertifikat-web-git-feature-system-v2-fernandojm1211s-projects.vercel.app/pages/home.html";
+const BASE_URL = "https://sertifikat-web-git-feature-system-v2-fernandojm1211s-projects.vercel.app";
 
 export default function () {
 
     const res = http.get(
-        `${BASE_URL}/kegiatan-list`
+        `${BASE_URL}/api/kegiatan-list`
     );
 
     check(res, {
